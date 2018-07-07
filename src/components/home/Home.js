@@ -39,9 +39,9 @@ class Home extends Component {
             <View style={containerStyle}>
                 <View style={{flex:1}}>
                     <News passRefUpward={this.getRefsFromChild} />
-                    <TouchableOpacity style={arrowUpStyle} onPress={this.onClickTop.bind(this)}>
+                    {/* <TouchableOpacity style={arrowUpStyle} onPress={this.onClickTop.bind(this)}>
                         <Image style={imageUp} source={require('../../assets/icons/up.png')} />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
                 <Menu indexSelected={this.setIndexSelected()} />
             </View>

@@ -1,38 +1,14 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 
-const CarrerItem = ({ iconCarrer, label }) => {
+const CarrerItem = ({ iconCarrer, label, imageCarrer }) => {
     const {iconImageStyle, imageContainer, textStyle} = styles;
     return (
         <TouchableOpacity style={imageContainer}>
-            <Image  resizeMode='stretch' style={iconImageStyle} source={seletectedIcon(iconCarrer)} />
+            <Image  resizeMode='stretch' style={iconImageStyle} source={{uri:imageCarrer}} />
             <Text style={textStyle}>{label}</Text>
         </TouchableOpacity>
     );
-}
-
-const seletectedIcon = (iconCarrer) => {
-    switch (iconCarrer) {
-        case 'systems':
-            return require('../../assets/images/computer.png');
-            break;
-        case 'admin':
-            return require('../../assets/images/admin.png');
-            break;
-        case 'bilin':
-            return require('../../assets/images/bilin.png');
-            break;
-        case 'economy':
-            return require('../../assets/images/economy.png');
-            break;
-        case 'industrial':
-            return require('../../assets/images/industrial.png');
-            break;
-        case 'pres':
-            return require('../../assets/images/pres.png');
-            break;
-
-    }
 }
 
 const styles = {

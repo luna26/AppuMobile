@@ -18,14 +18,10 @@ class Menu extends Component {
     onChangeOption(index) {
         switch (index) {
             case 1:
-            if(index != this.props.indexSelected){
                 Actions.home({ indexSelected: 1 });
-            } else {
-                this.props.onTop();
-            }
                 break;
             case 2:
-                //Actions.carrers({ indexSelected: 2 });
+                Actions.carrers({ indexSelected: 2 });
                 break;
             case 3:
                 Actions.carrers({ indexSelected: 3 });
@@ -57,13 +53,13 @@ class Menu extends Component {
                     onPress={this.onChangeOption.bind(this)}
                     indexSelected={this.props.indexSelected}
                 />
-                <MenuItem
+                {/* <MenuItem
                     label={'Eventos'}
                     iconSelected={'events'}
                     index={3}
                     onPress={this.onChangeOption.bind(this)}
                     indexSelected={this.props.indexSelected}
-                />
+                /> */}
                 {/* <MenuItem
                     label={'Contactos'}
                     iconSelected={'contact'}
