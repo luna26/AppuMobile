@@ -30,7 +30,7 @@ class Menu extends Component {
                 Actions.carrers({ indexSelected: 4 });
                 break;
             case 5:
-                Actions.carrers({ indexSelected: 5 });
+                Actions.info({ indexSelected: 5 });
                 break;
         }
     }

@@ -1,15 +1,31 @@
 import React, { Component } from 'react';
 import { Text, Image, TouchableOpacity, ScrollView, View, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
-import { onLoadCareers } from '../../actions';
+import { onLoadCareers, showCareerDetail, getSpecificCareer, closeBlurSection } from '../../actions';
 import CarrerItem from './carrerItem';
 import Header from '../header/header';
 import Menu from '../menu/menu';
+import BlurSectionCarrer from './blurSectionCarrer';
 
 class Carrers extends Component {
     componentWillMount() {
         this.props.onLoadCareers();
     }
+
+    clickCareer(id){
+        this.props.showCareerDetail(id);
+    }
+
+    closeBlurSection(){
+        this.props.closeBlurSection();
+    }
+
+    returnTemplateCareer(){
+        if(this.props.careers.careerDetail){
+            return <BlurSectionCarrer idCareer={this.props.careers.careerDetail} closeBlur={this.closeBlurSection.bind(this)} objCareer={this.props.careers.infoObjCareer}/>;   
+        }
+    }
+    
     renderCarrers() {
         const { containerActivity, containerIconsStyle } = styles;
         if (this.props.careers.infoCareers) {
@@ -20,9 +36,9 @@ class Carrers extends Component {
 
                         this.props.careers.infoCareers.map(function (item, index) {
                             return (
-                                <CarrerItem key={index} label={item.careers_title} imageCarrer={SERVER_URL + item.careers_url_img} />
+                                <CarrerItem key={index} idItem={item.careers_id} onClcikItem={this.clickCareer.bind(this)} label={item.careers_title} imageCarrer={SERVER_URL + item.careers_url_img} />
                             );
-                        })
+                        }.bind(this))
 
                     }
                 </ScrollView>
@@ -44,6 +60,7 @@ class Carrers extends Component {
                     {this.renderCarrers()}
                 </View>
                 <Menu indexSelected={this.props.indexSelected} />
+                {this.returnTemplateCareer()}
             </View>
         );
     }
@@ -88,4 +105,4 @@ const mapStateToProps = ({ careers }) => {
     };
 };
 
-export default connect(mapStateToProps, { onLoadCareers })(Carrers);
+export default connect(mapStateToProps, { onLoadCareers, showCareerDetail, getSpecificCareer, closeBlurSection })(Carrers);

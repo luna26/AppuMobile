@@ -1,10 +1,10 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 
-const CarrerItem = ({ iconCarrer, label, imageCarrer }) => {
+const CarrerItem = ({ iconCarrer, label, imageCarrer, onClcikItem, idItem }) => {
     const {iconImageStyle, imageContainer, textStyle} = styles;
     return (
-        <TouchableOpacity style={imageContainer}>
+        <TouchableOpacity style={imageContainer} onPress={onClcikItem.bind(this, idItem)}>
             <Image  resizeMode='stretch' style={iconImageStyle} source={{uri:imageCarrer}} />
             <Text style={textStyle}>{label}</Text>
         </TouchableOpacity>
