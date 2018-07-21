@@ -34,7 +34,7 @@ class Info extends Component {
                 </ScrollView>
             );
         } else {
-            <View style={onLoadContainer}>
+            <View>
                 <ActivityIndicator size="large" color="rgba(61, 196, 255, 0.9)" />
             </View>
         }
