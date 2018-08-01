@@ -1,16 +1,21 @@
-import { LOAD_NEWS, NEWS_LOADING } from '../actions/types';
+import { LOAD_NEWS, NEWS_LOADING, LOAD_MORE_NEWS } from '../actions/types';
 
 const INITIAL_STATE = {
   loading_news: false,
-  news: null
+  loading_more_news:false,
+  news: [],
+  skip: 0,
+  take: 7
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case LOAD_NEWS:
       return { ...state, loading_news: action.payload };
+    case LOAD_MORE_NEWS:
+      return { ...state, loading_more_news: action.payload };
     case NEWS_LOADING:
-      return { ...state, news: action.payload };
+      return { ...state, loading_more_news: false, news: state.news.concat(action.payload), skip: state.take, take: state.take + 7 };
     default:
       return state;
   }

@@ -13,8 +13,8 @@ const RouterComponent = () => {
         <Router >
             <Stack key='root'>
                 <Scene key="splash" component={Splash} hideNavBar={true} />
-                <Scene key="home" component={Home} hideNavBar={true}  />
-                <Scene key="carrers" component={Carrers} hideNavBar={true} initial/>
+                <Scene key="home" component={Home} hideNavBar={true}  initial/>
+                <Scene key="carrers" component={Carrers} hideNavBar={true} />
                 <Scene key="info" component={Info} hideNavBar={true} />
             </Stack>
         </Router>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Linking  } from 'react-native';
 import { connect } from 'react-redux';
 import { getSpecificCareer } from '../../actions';
 
@@ -20,8 +20,20 @@ class BlurSectionCarrer extends Component {
         );
     }
 
+    onClickPlan(planUrl){
+        let plaUrlServer = 'http://34.219.69.51/' + planUrl;
+        Linking.canOpenURL(plaUrlServer).then(supported => {
+            if (supported) {
+              Linking.openURL(plaUrlServer);
+            } else {
+              console.log("Don't know how to open URI: " + plaUrlServer);
+            }
+          });
+    }
+
     renderInfoCareer() {
         if (this.props.objCareer) {
+            console.log(this.props.objCareer[0], 'this.props.objCareer[0]');
             const { styleTextButton, styleTitleText, buttoStyle, mainContainer, infoContainer, containerTitle, containerDesc, styleDescText, containerButton } = styles;
             return (
                 <View style={mainContainer}>
@@ -34,7 +46,7 @@ class BlurSectionCarrer extends Component {
                         </ScrollView>
                     </View>
                     <View style={containerButton}>
-                        <TouchableOpacity style={buttoStyle}>
+                        <TouchableOpacity onPress={this.onClickPlan.bind(this, this.props.objCareer[0].careers_url_path)} style={buttoStyle}>
                             <Text style={styleTextButton}>Plan de estudio</Text>
                         </TouchableOpacity>
                     </View>
