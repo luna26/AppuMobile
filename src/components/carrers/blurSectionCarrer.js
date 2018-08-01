@@ -9,7 +9,6 @@ class BlurSectionCarrer extends Component {
     }
 
     render() {
-        console.log(this.props.objCareer, 'FUNCIONA');
         const { blurContainer, blurSubContainer } = styles;
         return (
             <View style={blurContainer}>

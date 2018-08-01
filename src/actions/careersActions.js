@@ -6,7 +6,6 @@ export const onLoadCareers = () => {
     return dispatch => {
         axios.post('http://34.219.69.51/getCareers')
             .then(function (response) {
-                console.log(response);
                 setTimeout(function () {
                     dispatch({
                         type: ON_LOAD_CAREERS,
@@ -32,7 +31,6 @@ export const getSpecificCareer = (id) =>{
     return dispatch => {
         axios.post('http://34.219.69.51/getCareer', { id: id })
             .then(function (response) {
-                console.log(response);
                 setTimeout(function () {
                     dispatch({
                         type: ON_RECEIVED_INFO_CAREER,

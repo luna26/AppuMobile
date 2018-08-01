@@ -8,8 +8,10 @@ import Menu from '../menu/menu';
 import BlurSectionCarrer from './blurSectionCarrer';
 
 class Carrers extends Component {
-    componentWillMount() {
-        this.props.onLoadCareers();
+    componentDidMount() {
+        if(this.props.careers.infoCareers == null){
+            this.props.onLoadCareers();
+        }
     }
 
     clickCareer(id){

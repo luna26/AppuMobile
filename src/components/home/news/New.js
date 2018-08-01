@@ -15,7 +15,9 @@ class News extends Component {
         };
     }
     componentDidMount() {
-        this.props.loadNewsRequest(this.props.skip);
+        if(this.props.news.length == 0){
+            this.props.loadNewsRequest(this.props.skip);
+        }
         this.props.passRefUpward(this.refs);
     }
 
@@ -108,7 +110,11 @@ const styles = {
         backgroundColor: '#3dc4ff',
         zIndex: 1000,
         paddingBottom:5,
-        paddingTop:5
+        paddingTop:5,
+        marginTop:10,
+        marginLeft:10,
+        marginRight:10,
+        borderRadius:10
     },
     textLoadMore:{
         textAlign:'center',
