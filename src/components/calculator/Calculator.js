@@ -46,7 +46,7 @@ class Calculator extends Component {
                     selectedValue={this.state.careerSelected}
                     style={{ height: 50, width: '100%' }}
                     onValueChange={this.sendCareerSelected.bind(this)}>
-                    <Picker.Item key={'unselectable'} label={'Selecione su carrera'} value={'default'} />
+                    <Picker.Item key={'unselectable'} label={'Seleccione su carrera'} value={'default'} />
                     {
                         this.props.calculator.careersCalculator.map(function (item, index) {
                             return (
