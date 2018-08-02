@@ -13,7 +13,8 @@ class Calculator extends Component {
         this.state = {
             careerSelected: '',
             arrayCoursesSelected: [],
-            checked: []
+            checked: [],
+            step: 1
         }
     }
 
@@ -116,18 +117,24 @@ class Calculator extends Component {
         }
     }
 
+    changeStep(step){
+        this.setState({
+            step:step
+        });
+    }
+
     renderNextBtn() {
         const { btnNextStyle, textBtnNextStyle } = styles;
-        if(this.state.arrayCoursesSelected.length != 0){
+        if (this.state.arrayCoursesSelected.length != 0) {
             return (
                 <View style={btnNextStyle}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={this.changeStep.bind(this, 2)}>
                         <Text style={textBtnNextStyle}>Siguiente</Text>
                     </TouchableOpacity>
                 </View>
             );
-        }else{
-            return(
+        } else {
+            return (
                 <View>
                 </View>
             );
@@ -135,27 +142,42 @@ class Calculator extends Component {
     }
 
     renderCalculator() {
-        const { mainContainerCalc, mainText, containerCalc, containerActivity, containerInfoStyle } = styles;
-        if (this.props.calculator.careersCalculator.length != 0) {
-            return (
-                <View style={mainContainerCalc}>
-                    <Text style={mainText}>Calculadora para estudiantes de primer ingreso</Text>
-                    <View style={containerCalc}>
-                        {this.renderPickerCareer()}
+        if (this.state.step == 1) {
+            const { mainContainerCalc, mainText, containerCalc, containerActivity, containerInfoStyle } = styles;
+            if (this.props.calculator.careersCalculator.length != 0) {
+                return (
+                    <View style={mainContainerCalc}>
+                        <Text style={mainText}>Calculadora para estudiantes de primer ingreso</Text>
+                        <View style={containerCalc}>
+                            {this.renderPickerCareer()}
+                        </View>
+                        <View style={containerInfoStyle}>
+                            {this.renderInfoCalculator()}
+                        </View>
+                        {this.renderNextBtn()}
                     </View>
-                    <View style={containerInfoStyle}>
-                        {this.renderInfoCalculator()}
+                );
+            } else {
+                return (
+                    <View style={containerActivity}>
+                        <ActivityIndicator size="large" color="#3dc4ff" />
                     </View>
-                    {this.renderNextBtn()}
-                </View>
-            );
-        } else {
-            return (
-                <View style={containerActivity}>
-                    <ActivityIndicator size="large" color="#3dc4ff" />
-                </View>
-            );
+                );
+            }
+        } else if(this.state.step == 2) {
+            return this.sendInformation();
         }
+    }
+
+    sendInformation() {
+        const { mainContainerCalc} = styles;
+        return (
+            <View style={mainContainerCalc}>
+                <Text>
+                    Ingrese la informacion solicitada
+                </Text>
+            </View>
+        );
     }
 
     render() {
