@@ -14,3 +14,7 @@ export const ON_RECEIVED_INFO_CAREER = 'on_received_info_career';
 
 //INFO
 export const ON_LOAD_INFO = 'on_load_info';
+
+//CALCULATOR
+export const ON_LOAD_CAREERS_CALC = 'on_load_calculator';
+export const ON_LOAD_COURSES_CALC = 'on_load_courses_calc';

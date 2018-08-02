@@ -32,6 +32,9 @@ class Menu extends Component {
             case 5:
                 Actions.info({ indexSelected: 5 });
                 break;
+            case 6:
+                Actions.calc({ indexSelected: 6 });
+                break;
         }
     }
     render() {
@@ -67,6 +70,13 @@ class Menu extends Component {
                     onPress={this.onChangeOption.bind(this)}
                     indexSelected={this.props.indexSelected}
                 /> */}
+                <MenuItem
+                    label={'Calculadora'}
+                    iconSelected={'calc'}
+                    index={6}
+                    onPress={this.onChangeOption.bind(this)}
+                    indexSelected={this.props.indexSelected}
+                />
                 <MenuItem
                     label={'Info'}
                     iconSelected={'info'}

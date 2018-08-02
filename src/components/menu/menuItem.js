@@ -43,6 +43,12 @@ const renderIconSelected = (icon, indexSelected) => {
             } else {
                 return require('../../assets/icons/info1.png');
             }
+        case 'calc':
+        if (6 == indexSelected) {
+            return require('../../assets/icons/calc.png');
+        } else {
+            return require('../../assets/icons/calc.png');
+        }
     }
 }
 
