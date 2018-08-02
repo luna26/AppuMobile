@@ -33,7 +33,7 @@ class Carrers extends Component {
         if (this.props.careers.infoCareers) {
             const SERVER_URL = 'http://34.219.69.51';
             return (
-                <ScrollView contentContainerStyle={containerIconsStyle} showsHorizontalScrollIndicator={false} horizontal={true} >
+                <ScrollView removeClippedSubviews={true} contentContainerStyle={containerIconsStyle} showsHorizontalScrollIndicator={false} horizontal={true} >
                     {
 
                         this.props.careers.infoCareers.map(function (item, index) {

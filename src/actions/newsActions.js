@@ -1,4 +1,4 @@
-import { LOAD_NEWS, NEWS_LOADING, LOAD_MORE_NEWS } from './types';
+import { LOAD_NEWS, NEWS_LOADING, LOAD_MORE_NEWS, NO_MORE_NEWS } from './types';
 import axios from 'axios';
 
 export const loadNewsRequest = (skip) => {
@@ -15,12 +15,19 @@ export const loadNewsRequest = (skip) => {
         }
         axios.post('http://34.219.69.51/getNews', {skip:skip})
             .then(function (response) {
-                setTimeout(function () {
+                if(response.data.length != 0){
+                    setTimeout(function () {
+                        dispatch({
+                            type: NEWS_LOADING,
+                            payload: response.data
+                        });
+                    },1500);
+                }else{
                     dispatch({
-                        type: NEWS_LOADING,
+                        type: NO_MORE_NEWS,
                         payload: response.data
                     });
-                },1500);
+                }
             }) 
             .catch(function (error) {
                 console.log(error);

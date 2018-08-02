@@ -3,6 +3,7 @@
 export const LOAD_NEWS = 'load_news';
 export const NEWS_LOADING = 'news_loading';
 export const LOAD_MORE_NEWS = 'load_more_news';
+export const NO_MORE_NEWS = 'load_no_more_news';
 
 //MENU
 export const ON_CHANGE_OPTION = 'on_change_option';

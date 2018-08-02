@@ -5,7 +5,7 @@ const CarrerItem = ({ iconCarrer, label, imageCarrer, onClcikItem, idItem }) => 
     const {iconImageStyle, imageContainer, textStyle} = styles;
     return (
         <TouchableOpacity style={imageContainer} onPress={onClcikItem.bind(this, idItem)}>
-            <Image  resizeMode='stretch' style={iconImageStyle} source={{uri:imageCarrer}} />
+            <Image  style={iconImageStyle} source={{uri:imageCarrer}} />
             <Text style={textStyle}>{label}</Text>
         </TouchableOpacity>
     );

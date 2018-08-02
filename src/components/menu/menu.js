@@ -6,14 +6,6 @@ import { onChangeOption } from '../../actions';
 import { Actions } from 'react-native-router-flux';
 
 class Menu extends Component {
-    // constructor(props){
-    //     super(props);
-
-    //     this.state = {
-    //         refsFromNews:null,
-    //         update:true
-    //     }
-    // }
 
     onChangeOption(index) {
         switch (index) {
@@ -56,20 +48,6 @@ class Menu extends Component {
                     onPress={this.onChangeOption.bind(this)}
                     indexSelected={this.props.indexSelected}
                 />
-                {/* <MenuItem
-                    label={'Eventos'}
-                    iconSelected={'events'}
-                    index={3}
-                    onPress={this.onChangeOption.bind(this)}
-                    indexSelected={this.props.indexSelected}
-                /> */}
-                {/* <MenuItem
-                    label={'Contactos'}
-                    iconSelected={'contact'}
-                    index={4}
-                    onPress={this.onChangeOption.bind(this)}
-                    indexSelected={this.props.indexSelected}
-                /> */}
                 <MenuItem
                     label={'Calculadora'}
                     iconSelected={'calc'}

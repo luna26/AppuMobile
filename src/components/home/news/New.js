@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, ActivityIndicator, Image } from 'react-native';
+import { Text, View, ScrollView, ActivityIndicator, Image, ListView } from 'react-native';
 import { connect } from 'react-redux';
 import { loadNewsRequest } from '../../../actions';
 import NewItem from './NewItem';
@@ -14,21 +14,48 @@ class News extends Component {
             sizeScroll: 0
         };
     }
+
     componentDidMount() {
-        if(this.props.news.length == 0){
+        if (this.props.news.length == 0) {
             this.props.loadNewsRequest(this.props.skip);
         }
-        this.props.passRefUpward(this.refs);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        // nextProps are the next set of props that this component 
+        // will be rendered with 
+        // this.props is still the old set of props 
+        this.createDataSource(nextProps);
+    }
+
+
+    createDataSource({ news }) {
+        const ds = new ListView.DataSource({
+            rowHasChanged: (r1, r2) => r1 !== r2
+        });
+
+
+        this.dataSource = ds.cloneWithRows(news);
+    }
+
+
+    renderRow(newItem) {
+        const SERVER_URL = 'http://34.219.69.51';
+        return <NewItem imageUrl={SERVER_URL + newItem.news_url_image} titleNew={newItem.news_title} dateNew={newItem.news_date} descNew={newItem.news_desc} />;
     }
 
     renderNews(newsObj) {
-        const { containerActivity } = styles;
-        const SERVER_URL = 'http://34.219.69.51';
-        if (newsObj.length > 0) {
-            return newsObj.map(function (newItem, x) {
-                return <NewItem key={x} imageUrl={SERVER_URL + newItem.news_url_image} titleNew={newItem.news_title} dateNew={newItem.news_date} descNew={newItem.news_desc} />
-            });
+        if (this.dataSource) {
+            return (
+                <ListView
+                    removeClippedSubviews={true}
+                    enableEmptySections
+                    dataSource={this.dataSource}
+                    renderRow={this.renderRow}
+                />
+            );
         } else {
+            const { containerActivity } = styles;
             return (
                 <View style={containerActivity}>
                     <ActivityIndicator size="large" color="#3dc4ff" />
@@ -37,12 +64,28 @@ class News extends Component {
         }
     }
 
+
+    // renderNews(newsObj) {
+    //     const { containerActivity } = styles;
+    //     const SERVER_URL = 'http://34.219.69.51';
+    //     if (newsObj.length > 0) {
+    //         return newsObj.map(function (newItem, x) {
+    //             return <NewItem key={x} imageUrl={SERVER_URL + newItem.news_url_image} titleNew={newItem.news_title} dateNew={newItem.news_date} descNew={newItem.news_desc} />
+    //         });
+    //     } else {
+    //         return (
+    //             <View style={containerActivity}>
+    //                 <ActivityIndicator size="large" color="#3dc4ff" />
+    //             </View>
+    //         );
+    //     }
+    // }
+
     isCloseToBottom({ layoutMeasurement, contentOffset, contentSize }) {
         const paddingToBottom = 20;
 
         if (this.state.sizeScroll != contentSize.height - paddingToBottom) {
-            this.setState({ sizeScroll: contentSize.height - paddingToBottom });
-            this.setState({ loadMore: true });
+            this.setState({ sizeScroll: contentSize.height - paddingToBottom, loadMore: true });
         }
 
         return layoutMeasurement.height + contentOffset.y >=
@@ -74,9 +117,8 @@ class News extends Component {
                 {this.showLoaderMoreNews()}
                 <ScrollView
                     showsVerticalScrollIndicator={false}
-                    ref='_scrollViewNews'
                     onScroll={({ nativeEvent }) => {
-                        if (this.isCloseToBottom(nativeEvent) && this.state.loadMore) {
+                        if (this.isCloseToBottom(nativeEvent) && this.state.loadMore && this.props.moreNews) {
                             this.loadMoreNews();
                         }
                     }}
@@ -105,20 +147,20 @@ const styles = {
     styleLoadMore: {
         position: 'absolute',
         top: 0,
-        left:0,
-        right:0,
+        left: 0,
+        right: 0,
         backgroundColor: '#3dc4ff',
         zIndex: 1000,
-        paddingBottom:5,
-        paddingTop:5,
-        marginTop:10,
-        marginLeft:10,
-        marginRight:10,
-        borderRadius:10
+        paddingBottom: 5,
+        paddingTop: 5,
+        marginTop: 10,
+        marginLeft: 10,
+        marginRight: 10,
+        borderRadius: 10
     },
-    textLoadMore:{
-        textAlign:'center',
-        color:'white',
+    textLoadMore: {
+        textAlign: 'center',
+        color: 'white',
     }
 }
 
@@ -126,7 +168,8 @@ const mapStateToProps = (state) => {
     return {
         news: state.home.news,
         skip: state.home.skip,
-        loading_more_news: state.home.loading_more_news
+        loading_more_news: state.home.loading_more_news,
+        moreNews: state.home.moreNews
     };
 };
 

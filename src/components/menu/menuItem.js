@@ -10,7 +10,7 @@ const MenuItem = ({ label, onPress, iconSelected, index, indexSelected }) => {
         </TouchableOpacity>
     );
 }
-
+ 
 const renderIconSelected = (icon, indexSelected) => {
     switch (icon) {
         case 'home':

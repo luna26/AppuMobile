@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Picker, ActivityIndicator, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, Picker, ActivityIndicator, ScrollView, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { onLoadCareersCalc, getCoursesCarrer } from '../../actions';
 import Header from '../header/header';
@@ -117,9 +117,9 @@ class Calculator extends Component {
         }
     }
 
-    changeStep(step){
+    changeStep(step) {
         this.setState({
-            step:step
+            step: step
         });
     }
 
@@ -164,20 +164,54 @@ class Calculator extends Component {
                     </View>
                 );
             }
-        } else if(this.state.step == 2) {
+        } else if (this.state.step == 2) {
             return this.sendInformation();
+        } else if (this.state.step == 3) {
+            //return this.sendInformationStep3();
         }
     }
 
-    sendInformation() {
-        const { mainContainerCalc} = styles;
+    sendInformationStep3() {
+        const { mainContainerCalc } = styles;
         return (
             <View style={mainContainerCalc}>
-                <Text>
-                    Ingrese la informacion solicitada
-                </Text>
+                <Text>Nombre Completo</Text>
             </View>
         );
+    }
+
+    sendInformation() {
+        const { formCalc, mainContainerCalc } = styles;
+        return (
+            <ScrollView style={mainContainerCalc}>
+                <View style={formCalc}>
+                    <View>
+                        <Text>Ingrese la informacion solicitada</Text>
+                    </View>
+                    <View>
+                        <Text>Nombre Completo</Text>
+                        <TextInput />
+                    </View>
+                    <View>
+                        <Text>Correo</Text>
+                        <TextInput />
+                    </View>
+                    <View>
+                        <Text>Telefono</Text>
+                        <TextInput />
+                    </View>
+                    <View>
+                        <TouchableOpacity onPress={this.calcPrice}>
+                            <Text>Calcular</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </ScrollView>
+        );
+    }
+
+    calcPrice() {
+
     }
 
     render() {
@@ -245,6 +279,12 @@ const styles = {
     textBtnNextStyle: {
         color: 'white',
         alignSelf: 'center',
+    },
+    formCalc: {
+        marginLeft: 10,
+        marginRight: 10,
+        paddingLeft: 10,
+        paddingRight: 10
     }
 }
 

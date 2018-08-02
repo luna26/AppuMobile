@@ -5,7 +5,7 @@ const Header = () => {
     const { containerLogo, logoStyle, textStyle } = styles;
     return (
         <View style={containerLogo}>
-            <Image resizeMode='contain' style={logoStyle} source={require('../../assets/images/Logo-ucem.png')} />
+            <Image style={logoStyle} source={require('../../assets/images/Logo-ucem.png')} />
             <Text style={textStyle}>Universidad de Ciencias Empresariales</Text>
         </View>
     );
