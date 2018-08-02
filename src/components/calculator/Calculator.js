@@ -118,13 +118,20 @@ class Calculator extends Component {
 
     renderNextBtn() {
         const { btnNextStyle, textBtnNextStyle } = styles;
-        return (
-            <View style={btnNextStyle}>
-                <TouchableOpacity>
-                    <Text style={textBtnNextStyle}>Siguiente</Text>
-                </TouchableOpacity>
-            </View>
-        );
+        if(this.state.arrayCoursesSelected.length != 0){
+            return (
+                <View style={btnNextStyle}>
+                    <TouchableOpacity>
+                        <Text style={textBtnNextStyle}>Siguiente</Text>
+                    </TouchableOpacity>
+                </View>
+            );
+        }else{
+            return(
+                <View>
+                </View>
+            );
+        }
     }
 
     renderCalculator() {
