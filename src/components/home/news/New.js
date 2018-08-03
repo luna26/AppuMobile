@@ -3,7 +3,6 @@ import { Text, View, ScrollView, ActivityIndicator, Image, ListView } from 'reac
 import { connect } from 'react-redux';
 import { loadNewsRequest } from '../../../actions';
 import NewItem from './NewItem';
-import Header from '../../header/header';
 
 class News extends Component {
     constructor(props) {
@@ -22,23 +21,16 @@ class News extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        // nextProps are the next set of props that this component 
-        // will be rendered with 
-        // this.props is still the old set of props 
         this.createDataSource(nextProps);
     }
 
-
     createDataSource({ news }) {
-        console.log(news, 'news');
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
 
-
         this.dataSource = ds.cloneWithRows(news);
     }
-
 
     renderRow(newItem) {
         const SERVER_URL = 'http://34.219.69.51';
@@ -65,23 +57,6 @@ class News extends Component {
             );
         }
     }
-
-
-    // renderNews(newsObj) {
-    //     const { containerActivity } = styles;
-    //     const SERVER_URL = 'http://34.219.69.51';
-    //     if (newsObj.length > 0) {
-    //         return newsObj.map(function (newItem, x) {
-    //             return <NewItem key={x} imageUrl={SERVER_URL + newItem.news_url_image} titleNew={newItem.news_title} dateNew={newItem.news_date} descNew={newItem.news_desc} />
-    //         });
-    //     } else {
-    //         return (
-    //             <View style={containerActivity}>
-    //                 <ActivityIndicator size="large" color="#3dc4ff" />
-    //             </View>
-    //         );
-    //     }
-    // }
 
     isCloseToBottom({ layoutMeasurement, contentOffset, contentSize }) {
         const paddingToBottom = 20;
@@ -112,42 +87,27 @@ class News extends Component {
     }
 
     render() {
-        console.log('montado las noticias');
         const { contianerNewsStyle, arrowUpStyle } = styles;
         const { news } = this.props;
         return (
-            <View style={{ position: 'relative' }}>
+            <View style={{ position: 'relative', marginLeft:8, marginRight:8, flex:1 }}>
                 {this.renderNews(this.props.news)}
             </View>
         );
     }
 }
 
-// {this.showLoaderMoreNews()}
-//                 <ScrollView
-//                     showsVerticalScrollIndicator={false}
-//                     onScroll={({ nativeEvent }) => {
-//                         if (this.isCloseToBottom(nativeEvent) && this.state.loadMore && this.props.moreNews) {
-//                             this.loadMoreNews();
-//                         }
-//                     }}
-//                 >
-//                     <Header />
-//                     <View style={contianerNewsStyle}>
-//                         {this.renderNews(this.props.news)}
-//                     </View>
-//                 </ScrollView>
-
 const styles = {
     contianerNewsStyle: {
         flex: 1,
         marginLeft: 15,
         marginRight: 15,
-        backgroundColor: 'white',
         position: 'relative',
     },
     containerActivity: {
-        flex: 1
+        justifyContent:'center',
+        flex:1,
+        backgroundColor: 'white',
     },
     styleLoadMore: {
         position: 'absolute',

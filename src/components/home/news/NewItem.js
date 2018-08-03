@@ -19,12 +19,16 @@ class NewItem extends Component {
 const styles = {
     contianerNewsStyle: {
         flex: 1,
-        marginBottom: 25,
+        marginBottom: 15,
+        paddingBottom:10,
+        backgroundColor:'white'
     },
     newStyle: {
         resizeMode: 'stretch',
         width: null,
-        height: 250
+        height: 250,
+        marginLeft: 15,
+        marginRight: 15,
     },
     textStyleNews: {
         fontSize: 20,

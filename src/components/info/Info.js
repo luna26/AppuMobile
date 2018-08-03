@@ -3,7 +3,7 @@ import { getInfo } from '../../actions';
 import { connect } from 'react-redux';
 import openMap from 'react-native-open-maps';
 import call from 'react-native-phone-call'
-import { View, Text, ScrollView, ActivityIndicator, TouchableOpacity, ImageBackground, Linking, Platform } from 'react-native';
+import { View, Text, ScrollView, ActivityIndicator, TouchableOpacity, ImageBackground, Linking, Platform, Image } from 'react-native';
 import Menu from '../menu/menu';
 import Header from '../header/header';
 
@@ -47,7 +47,7 @@ class Info extends Component {
         const { btnCallContainer, textCallBtn } = styles;
         return (
             <TouchableOpacity onPress={this.makeCall} style={btnCallContainer}>
-                <Text style={textCallBtn}>Llamar</Text>
+                <Image style={{ width: 60, height: 60 }} source={require('../../assets/icons/phone_icon.png')} />
             </TouchableOpacity>
         );
     }
@@ -58,10 +58,10 @@ class Info extends Component {
             <View style={containerStyle}>
                 <Header />
                 <View style={containerStyle}>
+                    {this.returnViewLocation()}
                     {this.renderInfo()}
+                    {this.returnCallButton()}
                 </View>
-                {this.returnViewLocation()}
-                {this.returnCallButton()}
                 <Menu indexSelected={this.props.indexSelected} />
             </View>
         );
@@ -90,7 +90,7 @@ class Info extends Component {
 
 const styles = {
     containerStyle: {
-        flex: 1
+        flex: 1,
     },
     containerInfo: {
         flex: .8
@@ -128,14 +128,12 @@ const styles = {
         fontSize: 15
     },
     btnCallContainer: {
-        flex: .2,
-        marginLeft: 10,
-        marginRight: 10,
-        backgroundColor: 'rgba(61, 196, 255, 0.9)',
-        justifyContent: 'center',
-        marginTop: 10,
-        marginBottom: 10,
-        borderRadius: 100
+        position: 'absolute',
+        bottom: 8,
+        right: 10,
+        zIndex: 1000,
+        width: 60,
+        height: 60
     },
     textCallBtn: {
         color: 'white',

@@ -16,7 +16,6 @@ class Home extends Component {
     }
 
     render() {
-        console.log('montado el home');
         const { containerStyle, container1, container2, arrowUpStyle, imageUp } = styles;
         return (
             <View style={containerStyle}>

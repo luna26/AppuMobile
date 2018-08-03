@@ -54,11 +54,13 @@ const renderIconSelected = (icon, indexSelected) => {
 
 const styles = {
     itemContainer: {
-        alignItems: 'center'
+        alignItems: 'center',
+        width: 30,
+        height: 30
     },
     imageStyle: {
-        width: 40,
-        height: 40
+        width: 30,
+        height: 30
     },
     textStyle: {
         textAlign: 'center'

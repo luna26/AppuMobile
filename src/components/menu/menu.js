@@ -70,12 +70,12 @@ class Menu extends Component {
 const styles = {
     containerMenu: {
         borderTopColor: '#179bd7',
-        borderTopWidth: 6,
+        borderTopWidth: 2,
         flexDirection: 'row',
-        height: 65,
+        height: 55,
         backgroundColor: 'white',
-        justifyContent: 'space-between',
-        padding: 7
+        justifyContent: 'space-around',
+        alignItems: 'center'
     }
 }
 

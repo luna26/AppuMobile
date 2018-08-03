@@ -10,7 +10,7 @@ class Splash extends Component {
             <View style={splashContainer}>
                 <View>
                     <Image style={logoStyle} source={require('../../assets/images/Logo-ucem.png')} />
-                    <ActivityIndicator size="small" color="#3dc4ff" />
+                    {/* <ActivityIndicator size="small" color="#3dc4ff" /> */}
                 </View>
             </View>
         );

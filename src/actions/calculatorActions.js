@@ -1,7 +1,7 @@
-import { 
-    ON_LOAD_CAREERS_CALC, 
-    ON_LOAD_COURSES_CALC, 
-    ON_LOAD_CALC_COST 
+import {
+    ON_LOAD_CAREERS_CALC,
+    ON_LOAD_COURSES_CALC,
+    ON_LOAD_CALC_COST
 } from './types';
 import axios from 'axios';
 
@@ -38,12 +38,11 @@ export const getCoursesCarrer = (id) => {
 
 export const requestCalc = (name, email, tel, courses) => {
     return dispatch => {
-        console.log('estos son los cursos a enviar', courses);
         data = {
-            name:name,
-            email: email, 
-            tel:tel,
-            courses:courses
+            name: name,
+            email: email,
+            tel: tel,
+            courses: courses
         }
         axios.post('http://34.219.69.51/calcCost', data)
             .then(function (response) {

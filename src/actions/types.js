@@ -20,3 +20,4 @@ export const ON_LOAD_INFO = 'on_load_info';
 export const ON_LOAD_CAREERS_CALC = 'on_load_calculator';
 export const ON_LOAD_COURSES_CALC = 'on_load_courses_calc';
 export const ON_LOAD_CALC_COST = 'on_load_calc-cost';
+export const ON_LOADING_CALC_COST = 'on_loading_calc_cost';
