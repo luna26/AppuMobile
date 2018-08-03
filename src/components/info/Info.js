@@ -13,14 +13,10 @@ class Info extends Component {
     }
 
     openMap() {
-<<<<<<< HEAD
-=======
-        var url = 'geo:10.019339,-84.219206';
->>>>>>> ed3cb268eac8641c4fb0bcfd8c000132b0d070f8
         if (Platform.OS === 'android') {
             openMap({ latitude: 10.019339, longitude: -84.219206 });
         } else {
-            Linking.openURL('http://maps.apple.com/?ll=10.019339,-84.219206');
+            Linking.openURL('https://maps.apple.com/?daddr=10.019339,-84.219206');
         }
     }
 
