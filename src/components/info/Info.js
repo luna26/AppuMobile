@@ -3,7 +3,7 @@ import { getInfo } from '../../actions';
 import { connect } from 'react-redux';
 import openMap from 'react-native-open-maps';
 import call from 'react-native-phone-call'
-import { View, Text, ScrollView, ActivityIndicator, TouchableOpacity, ImageBackground, Linking } from 'react-native';
+import { View, Text, ScrollView, ActivityIndicator, TouchableOpacity, ImageBackground, Linking, Platform } from 'react-native';
 import Menu from '../menu/menu';
 import Header from '../header/header';
 
