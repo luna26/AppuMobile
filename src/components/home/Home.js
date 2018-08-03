@@ -7,16 +7,6 @@ import Header from '../header/header';
 import BlurSectionCarrer from '../carrers/blurSectionCarrer';
 
 class Home extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            refsNews: null
-        }
-
-        this.getRefsFromChild = this.getRefsFromChild.bind(this);
-    }
-
     setIndexSelected() {
         if (this.props.indexSelected == undefined) {
             return 1
@@ -25,23 +15,13 @@ class Home extends Component {
         }
     }
 
-    getRefsFromChild(refs) {
-        this.setState({ refsNews: refs });
-    }
-
-    onClickTop() {
-        this.state.refsNews._scrollViewNews.scrollTo({ x: 0, y: 0, animated: true });
-    }
-
     render() {
+        console.log('montado el home');
         const { containerStyle, container1, container2, arrowUpStyle, imageUp } = styles;
         return (
             <View style={containerStyle}>
                 <View style={{flex:1}}>
-                    <News passRefUpward={this.getRefsFromChild} />
-                    {/* <TouchableOpacity style={arrowUpStyle} onPress={this.onClickTop.bind(this)}>
-                        <Image style={imageUp} source={require('../../assets/icons/up.png')} />
-                    </TouchableOpacity> */}
+                    <News />
                 </View>
                 <Menu indexSelected={this.setIndexSelected()} />
             </View>

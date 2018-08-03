@@ -110,6 +110,7 @@ class News extends Component {
     }
 
     render() {
+        console.log('montado las noticias');
         const { contianerNewsStyle, arrowUpStyle } = styles;
         const { news } = this.props;
         return (

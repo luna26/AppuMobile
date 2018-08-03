@@ -1,0 +1,4 @@
+#Thu Aug 02 02:54:01 CST 2018
+base.0=C\:\\Users\\jose.m.luna.gonzalez\\Documents\\GitHub\\AppuMobile\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+path.0=classes.dex
+renamed.0=classes.dex
