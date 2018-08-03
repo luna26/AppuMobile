@@ -3,7 +3,7 @@ import { getInfo } from '../../actions';
 import { connect } from 'react-redux';
 import openMap from 'react-native-open-maps';
 import call from 'react-native-phone-call'
-import { View, Text, ScrollView, ActivityIndicator, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, Text, ScrollView, ActivityIndicator, TouchableOpacity, ImageBackground, Linking } from 'react-native';
 import Menu from '../menu/menu';
 import Header from '../header/header';
 
@@ -13,8 +13,17 @@ class Info extends Component {
     }
 
     openMap() {
-        openMap({ latitude: 10.019339, longitude: -84.219206 });
+        // openMap({ latitude: 10.019339, longitude: -84.219206 });
+        var url = 'geo:10.019339,-84.219206';
+        Linking.canOpenURL(url).then(supported => {
+            if (supported) {
+                Linking.openURL(url);
+            } else {
+                console.log('Don\'t know how to open URI: ' + url);
+            }
+        });
     }
+
 
     returnViewLocation() {
         const { styleBtnMap, containerBtnText, mapImage, textBtnMap } = styles;
@@ -73,8 +82,8 @@ class Info extends Component {
                 </ScrollView>
             );
         } else {
-            const {ActivityIndicatorStyle} = styles;
-            return (    
+            const { ActivityIndicatorStyle } = styles;
+            return (
                 <View style={ActivityIndicatorStyle}>
                     <ActivityIndicator size="large" color="rgba(61, 196, 255, 0.9)" />
                 </View>
@@ -137,7 +146,7 @@ const styles = {
         alignSelf: 'center',
         fontSize: 25,
     },
-    ActivityIndicatorStyle:{
+    ActivityIndicatorStyle: {
         flex: 1,
         justifyContent: 'center',
     }
