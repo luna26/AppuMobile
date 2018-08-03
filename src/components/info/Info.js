@@ -13,15 +13,11 @@ class Info extends Component {
     }
 
     openMap() {
-        // openMap({ latitude: 10.019339, longitude: -84.219206 });
-        var url = 'geo:10.019339,-84.219206';
-        Linking.canOpenURL(url).then(supported => {
-            if (supported) {
-                Linking.openURL(url);
-            } else {
-                console.log('Don\'t know how to open URI: ' + url);
-            }
-        });
+        if (Platform.OS === 'android') {
+            openMap({ latitude: 10.019339, longitude: -84.219206 });
+        } else {
+            Linking.openURL('http://maps.apple.com/?ll=10.019339,-84.219206');
+        }
     }
 
 
