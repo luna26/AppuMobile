@@ -20,6 +20,7 @@ class Home extends Component {
         const { containerStyle, container1, container2, arrowUpStyle, imageUp } = styles;
         return (
             <View style={containerStyle}>
+                <Header />
                 <View style={{flex:1}}>
                     <News />
                 </View>

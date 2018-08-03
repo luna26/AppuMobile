@@ -30,6 +30,7 @@ class News extends Component {
 
 
     createDataSource({ news }) {
+        console.log(news, 'news');
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
@@ -52,6 +53,7 @@ class News extends Component {
                     enableEmptySections
                     dataSource={this.dataSource}
                     renderRow={this.renderRow}
+                    onEndReached={this.loadMoreNews.bind(this)}
                 />
             );
         } else {
@@ -115,24 +117,26 @@ class News extends Component {
         const { news } = this.props;
         return (
             <View style={{ position: 'relative' }}>
-                {this.showLoaderMoreNews()}
-                <ScrollView
-                    showsVerticalScrollIndicator={false}
-                    onScroll={({ nativeEvent }) => {
-                        if (this.isCloseToBottom(nativeEvent) && this.state.loadMore && this.props.moreNews) {
-                            this.loadMoreNews();
-                        }
-                    }}
-                >
-                    <Header />
-                    <View style={contianerNewsStyle}>
-                        {this.renderNews(this.props.news)}
-                    </View>
-                </ScrollView>
+                {this.renderNews(this.props.news)}
             </View>
         );
     }
 }
+
+// {this.showLoaderMoreNews()}
+//                 <ScrollView
+//                     showsVerticalScrollIndicator={false}
+//                     onScroll={({ nativeEvent }) => {
+//                         if (this.isCloseToBottom(nativeEvent) && this.state.loadMore && this.props.moreNews) {
+//                             this.loadMoreNews();
+//                         }
+//                     }}
+//                 >
+//                     <Header />
+//                     <View style={contianerNewsStyle}>
+//                         {this.renderNews(this.props.news)}
+//                     </View>
+//                 </ScrollView>
 
 const styles = {
     contianerNewsStyle: {
