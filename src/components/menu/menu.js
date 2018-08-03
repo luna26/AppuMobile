@@ -35,28 +35,28 @@ class Menu extends Component {
         return (
             <View style={containerMenu}>
                 <MenuItem
-                    label={'Inicio'}
+                    label={''}
                     iconSelected={'home'}
                     index={1}
                     onPress={this.onChangeOption.bind(this)}
                     indexSelected={this.props.indexSelected}
                 />
                 <MenuItem
-                    label={'Carreras'}
+                    label={''}
                     iconSelected={'carrers'}
                     index={2}
                     onPress={this.onChangeOption.bind(this)}
                     indexSelected={this.props.indexSelected}
                 />
                 <MenuItem
-                    label={'Calculadora'}
+                    label={''}
                     iconSelected={'calc'}
                     index={6}
                     onPress={this.onChangeOption.bind(this)}
                     indexSelected={this.props.indexSelected}
                 />
                 <MenuItem
-                    label={'Info'}
+                    label={''}
                     iconSelected={'info'}
                     index={5}
                     onPress={this.onChangeOption.bind(this)}
@@ -72,7 +72,7 @@ const styles = {
         borderTopColor: '#179bd7',
         borderTopWidth: 6,
         flexDirection: 'row',
-        height: 75,
+        height: 65,
         backgroundColor: 'white',
         justifyContent: 'space-between',
         padding: 7

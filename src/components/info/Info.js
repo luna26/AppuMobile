@@ -17,7 +17,7 @@ class Info extends Component {
     }
 
     returnViewLocation() {
-        const {styleBtnMap, containerBtnText, mapImage, textBtnMap} = styles;
+        const { styleBtnMap, containerBtnText, mapImage, textBtnMap } = styles;
         return (
             <TouchableOpacity onPress={this.openMap} style={styleBtnMap}>
                 <ImageBackground source={require('../../assets/images/map.png')} style={mapImage}>
@@ -29,20 +29,20 @@ class Info extends Component {
         );
     }
 
-    makeCall(){
+    makeCall() {
         const args = {
             number: '24309580', // String value with the number to call
             prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call 
-          }
-           
-          call(args).catch(console.error)
+        }
+
+        call(args).catch(console.error)
     }
 
-    returnCallButton(){
-        const {btnCallContainer, textCallBtn} = styles;
-        return(
+    returnCallButton() {
+        const { btnCallContainer, textCallBtn } = styles;
+        return (
             <TouchableOpacity onPress={this.makeCall} style={btnCallContainer}>
-               <Text style={textCallBtn}>Llamar</Text>
+                <Text style={textCallBtn}>Llamar</Text>
             </TouchableOpacity>
         );
     }
@@ -73,9 +73,12 @@ class Info extends Component {
                 </ScrollView>
             );
         } else {
-            <View>
-                <ActivityIndicator size="large" color="rgba(61, 196, 255, 0.9)" />
-            </View>
+            const {ActivityIndicatorStyle} = styles;
+            return (    
+                <View style={ActivityIndicatorStyle}>
+                    <ActivityIndicator size="large" color="rgba(61, 196, 255, 0.9)" />
+                </View>
+            );
         }
     }
 }
@@ -84,7 +87,7 @@ const styles = {
     containerStyle: {
         flex: 1
     },
-    containerInfo:{
+    containerInfo: {
         flex: .8
     },
     containerInfoText: {
@@ -96,43 +99,47 @@ const styles = {
         paddingTop: 15,
         paddingRight: 10
     },
-    styleBtnMap:{
+    styleBtnMap: {
         flex: .2,
-        marginLeft:10,
-        marginRight:10
+        marginLeft: 10,
+        marginRight: 10
     },
-    containerBtnText:{
-        backgroundColor:'white',
+    containerBtnText: {
+        backgroundColor: 'white',
         alignSelf: 'center',
-        paddingLeft:20,
-        paddingRight:20,
-        paddingTop:5,
-        paddingBottom:5,
-        borderRadius:50
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 5,
+        paddingBottom: 5,
+        borderRadius: 50
     },
-    mapImage:{
-        justifyContent:'center', 
-        width: '100%', 
-        height: '100%' 
+    mapImage: {
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%'
     },
-    textBtnMap:{
-        color:'rgba(61, 196, 255, 0.9)',
-        fontSize:15
+    textBtnMap: {
+        color: 'rgba(61, 196, 255, 0.9)',
+        fontSize: 15
     },
-    btnCallContainer:{
+    btnCallContainer: {
         flex: .2,
-        marginLeft:10,
-        marginRight:10,
+        marginLeft: 10,
+        marginRight: 10,
         backgroundColor: 'rgba(61, 196, 255, 0.9)',
-        justifyContent:'center', 
-        marginTop:10,
-        marginBottom:10,
-        borderRadius:100
+        justifyContent: 'center',
+        marginTop: 10,
+        marginBottom: 10,
+        borderRadius: 100
     },
-    textCallBtn:{
-        color:'white',
+    textCallBtn: {
+        color: 'white',
         alignSelf: 'center',
-        fontSize:25,
+        fontSize: 25,
+    },
+    ActivityIndicatorStyle:{
+        flex: 1,
+        justifyContent: 'center',
     }
 }
 

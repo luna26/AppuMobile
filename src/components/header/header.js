@@ -15,15 +15,11 @@ const styles = {
     containerLogo: {
         alignItems: 'center',
         backgroundColor: 'white',
-        height: 180,
+        height: 160,
         justifyContent: 'center',
         borderBottomColor: '#179bd7',
         borderBottomWidth: 6
 
-    },
-    logoStyle: {
-        //height: 60,
-        //width:100,
     },
     textStyle: {
         color: '#179bd7',

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Picker, ActivityIndicator, ScrollView, TextInput } from 'react-native';
 import { connect } from 'react-redux';
-import { onLoadCareersCalc, getCoursesCarrer } from '../../actions';
+import { onLoadCareersCalc, getCoursesCarrer, requestCalc } from '../../actions';
 import Header from '../header/header';
 import Menu from '../menu/menu';
 import CheckBox from 'react-native-check-box'
@@ -14,7 +14,10 @@ class Calculator extends Component {
             careerSelected: '',
             arrayCoursesSelected: [],
             checked: [],
-            step: 1
+            step: 1,
+            email: '',
+            name: '',
+            tel: ''
         }
     }
 
@@ -180,38 +183,67 @@ class Calculator extends Component {
         );
     }
 
+    onInputNameChange(text) {
+        this.setState({
+            name: text
+        });
+    }
+
+    onInputEmailChange(text) {
+        this.setState({
+            email: text
+        });
+    }
+
+    onInputTelChange(text) {
+        this.setState({
+            tel: text
+        });
+    }
+
     sendInformation() {
-        const { formCalc, mainContainerCalc } = styles;
+        const { itemFormStyle, formCalc, mainContainerCalc, btnNextStyle, textBtnNextStyle, btnNextCalcStyle, titleForm, titleText } = styles;
         return (
-            <ScrollView style={mainContainerCalc}>
-                <View style={formCalc}>
-                    <View>
-                        <Text>Ingrese la informacion solicitada</Text>
-                    </View>
-                    <View>
-                        <Text>Nombre Completo</Text>
-                        <TextInput />
-                    </View>
-                    <View>
-                        <Text>Correo</Text>
-                        <TextInput />
-                    </View>
-                    <View>
-                        <Text>Telefono</Text>
-                        <TextInput />
-                    </View>
-                    <View>
-                        <TouchableOpacity onPress={this.calcPrice}>
-                            <Text>Calcular</Text>
-                        </TouchableOpacity>
-                    </View>
+            <View style={mainContainerCalc}>
+                <View style={titleForm}>
+                    <Text style={titleText}>Ingrese la informacion solicitada</Text>
                 </View>
-            </ScrollView>
+                <ScrollView style={formCalc}>
+                    <View style={itemFormStyle}>
+                        <TextInput
+                            placeholder='Nombre Completo'
+                            value={this.state.name}
+                            onChangeText={text => this.onInputNameChange(text)}
+                        />
+                    </View>
+                    <View style={itemFormStyle}>
+                        <TextInput
+                            placeholder='Correo'
+                            value={this.state.email}
+                            onChangeText={text => this.onInputEmailChange(text)}
+                        />
+                    </View>
+                    <View style={itemFormStyle}>
+                        <TextInput
+                            placeholder='Telefono'
+                            keyboardType='numeric'
+                            maxLength={8}
+                            value={this.state.tel}
+                            onChangeText={text => this.onInputTelChange(text)}
+                        />
+                    </View>
+                </ScrollView>
+                <View style={[btnNextStyle, btnNextCalcStyle]}>
+                    <TouchableOpacity onPress={this.onPressCalc.bind(this)}>
+                        <Text style={textBtnNextStyle}>Calcular</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
         );
     }
 
-    calcPrice() {
-
+    onPressCalc(){
+        this.props.requestCalc(this.state.name, this.state.email, this.state.tel, this.state.arrayCoursesSelected);
     }
 
     render() {
@@ -229,6 +261,7 @@ const styles = {
     mainContainerCalc: {
         backgroundColor: 'white',
         flex: 1,
+        position: 'relative'
     },
     mainText: {
         fontSize: 18,
@@ -284,7 +317,23 @@ const styles = {
         marginLeft: 10,
         marginRight: 10,
         paddingLeft: 10,
-        paddingRight: 10
+        paddingRight: 10,
+        flex: .5,
+    },
+    btnNextCalcStyle: {
+        flex: .1,
+        justifyContent: 'center',
+    },
+    titleForm: {
+        flex: .3,
+        justifyContent: 'center'
+    },
+    titleText: {
+        fontSize: 18,
+        textAlign: 'center'
+    },
+    itemFormStyle: {
+        marginTop: 10
     }
 }
 
@@ -294,4 +343,4 @@ const mapStateToProps = ({ calculator }) => {
     };
 };
 
-export default connect(mapStateToProps, { onLoadCareersCalc, getCoursesCarrer })(Calculator);
+export default connect(mapStateToProps, { onLoadCareersCalc, getCoursesCarrer, requestCalc })(Calculator);
