@@ -18,19 +18,15 @@ class Info extends Component {
         showLocation({
             latitude: 10.019339,
             longitude: -84.219206,
-            title: 'UCEM',  // optional
+            // title: 'UCEM',  // optional
             googleForceLatLon: false,  // optionally force GoogleMaps to use the latlon for the query instead of the title
             googlePlaceId: 'ChIJVXqv2M_5oI8ReghxpawYMMM',  // optionally specify the google-place-id
             dialogTitle: 'Ver ubicación de la UCEM', // optional (default: 'Open in Maps')
             dialogMessage: 'Cuál aplicación desea utilizar?', // optional (default: 'What app would you like to use?')
             cancelText: 'Cancelar', // optional (default: 'Cancel')
-            appsWhiteList: ['google-maps'], // optionally you can set which apps to show (default: will show all supported apps installed on device)
-            app: 'uber', // optionally specify specific app to use
-            app: 'waze',
-            app: 'apple-maps',
+
         })
     }
-    
 
     /*openMap() {
         if (Platform.OS === 'android') {
@@ -39,8 +35,6 @@ class Info extends Component {
             Linking.openURL('https://maps.apple.com/?daddr=10.019339,-84.219206');
         }
     }*/
-
-
 
     returnViewLocation() {
         const { styleBtnMap, containerBtnText, mapImage, textBtnMap } = styles;
@@ -57,8 +51,8 @@ class Info extends Component {
 
     makeCall() {
         const args = {
-            number: '24309580', // String value with the number to call
-            prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call 
+            number: '24309580',
+            prompt: false 
         }
 
         call(args).catch(console.error)

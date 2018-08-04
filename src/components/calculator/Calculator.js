@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Picker, ActivityIndicator, ScrollView, TextInput } from 'react-native';
+import ActionSheet from 'react-native-actionsheet';
+import CheckBox from 'react-native-check-box';
 import { connect } from 'react-redux';
 import { onLoadCareersCalc, getCoursesCarrer, requestCalc } from '../../actions';
+import { View, Text, TouchableOpacity, Picker, ActivityIndicator, ScrollView, TextInput, Platform } from 'react-native';
 import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-component';
 import Header from '../header/header';
 import Menu from '../menu/menu';
-import CheckBox from 'react-native-check-box'
 
 class Calculator extends Component {
     constructor(props) {
@@ -26,7 +27,7 @@ class Calculator extends Component {
         this.props.onLoadCareersCalc();
     }
 
-    sendCareerSelected(itemValue, itemIndex) {
+    sendCareerSelected(itemValue) {
         this.setState({
             careerSelected: itemValue
         });
@@ -42,8 +43,21 @@ class Calculator extends Component {
         this.props.getCoursesCarrer(itemValue);
     }
 
+
     renderPickerCareer() {
-        const { pickerCareerStyle, pickerCareerContainerStyle } = styles;
+        if (Platform.OS === 'android') {
+            return this.renderPickerForAndroid();
+        } else if (Platform.OS === 'ios') {
+            return this.renderPickerForIOS();
+        }
+    }
+
+    renderPickerForAndroid() {
+        const {
+            pickerCareerStyle,
+            pickerCareerContainerStyle
+        } = styles;
+
         return (
             <Picker
                 selectedValue={this.state.careerSelected}
@@ -59,6 +73,29 @@ class Calculator extends Component {
                 }
             </Picker>
         );
+    }
+
+    renderPickerForIOS() {
+        return (
+            <View>
+                <Text onPress={this.showActionSheet}>Open ActionSheet</Text>
+                <ActionSheet
+                    ref={o => this.ActionSheet = o}
+                    title={'Seleccione su carrera'}
+                    options={['Apple', 'Banana', 'cancel']}
+                    cancelButtonIndex={2}
+                    destructiveButtonIndex={1}
+                    onPress={(index) => { 
+                        this.actionsSheetIOSonPress.bind(this, index);
+                     }}
+                />
+            </View>
+        );
+    }
+
+    actionsSheetIOSonPress(index){
+        console.log(index, 'index');
+        this.sendCareerSelected(index);
     }
 
     checkboxCoursesChange(data, index) {
@@ -145,7 +182,13 @@ class Calculator extends Component {
 
     renderCalculator() {
         if (this.state.step == 1) {
-            const { mainContainerCalc, mainText, containerCalc, containerActivity, containerInfoStyle } = styles;
+            const {
+                mainContainerCalc,
+                mainText,
+                containerCalc,
+                containerActivity,
+                containerInfoStyle
+            } = styles;
             if (this.props.calculator.careersCalculator.length != 0) {
                 return (
                     <View style={mainContainerCalc}>
@@ -172,7 +215,13 @@ class Calculator extends Component {
     }
 
     sendInformationStep3() {
-        const { mainContainerCalc, btnNextStyle, btnNextCalcStyle, textBtnNextStyle, textInfoTable } = styles;
+        const {
+            mainContainerCalc,
+            btnNextStyle,
+            btnNextCalcStyle,
+            textBtnNextStyle,
+            textInfoTable
+        } = styles;
         if (this.props.calculator.costs) {
             const { valor_por_credito, creditos_seleccionados } = this.props.calculator.costs.credito;
             console.log(this.props.calculator.costs, 'this.props.calculator.costs');
@@ -201,7 +250,16 @@ class Calculator extends Component {
     }
 
     returnTableCredit() {
-        const { total_a_pagar_mes, valor_por_credito, creditos_seleccionados, total_a_pagar, carne_total, costo_de_creditos, costo_de_creditos_descuento, costo_matricula, matricula_descuento } = this.props.calculator.costs.credito;
+        const {
+            total_a_pagar_mes,
+            valor_por_credito,
+            creditos_seleccionados,
+            total_a_pagar, carne_total,
+            costo_de_creditos,
+            costo_de_creditos_descuento,
+            costo_matricula,
+            matricula_descuento
+        } = this.props.calculator.costs.credito;
 
         tableData = [
             ['₡' + costo_de_creditos],
@@ -215,7 +273,16 @@ class Calculator extends Component {
 
         tableTitle = ['Colegiatura', 'Descuento', 'Matrícula', 'Descuento 1er ingreso', 'Carnet anual', 'Total a pagar', 'Pago por mes'];
 
-        const { title, wrapper, row, text, head, text1, tableContainer, tableTextTitle } = styles;
+        const {
+            title,
+            wrapper,
+            row,
+            text,
+            head,
+            text1,
+            tableContainer,
+            tableTextTitle
+        } = styles;
         return (
             <View style={tableContainer}>
                 <Text style={tableTextTitle}>Pago a credito</Text>
@@ -231,7 +298,15 @@ class Calculator extends Component {
     }
 
     returnTableCash() {
-        const { valor_por_credito, creditos_seleccionados, total_a_pagar, carne_total, costo_de_creditos, costo_de_creditos_descuento, costo_matricula, matricula_descuento } = this.props.calculator.costs.contado;
+        const {
+            valor_por_credito,
+            creditos_seleccionados,
+            total_a_pagar, carne_total,
+            costo_de_creditos,
+            costo_de_creditos_descuento,
+            costo_matricula,
+            matricula_descuento
+        } = this.props.calculator.costs.contado;
 
         tableTitle = ['Colegiatura', 'Descuento', 'Matrícula', 'Descuento 1er ingreso', 'Carnet anual', 'Total a pagar'];
         tableData = [
@@ -242,7 +317,16 @@ class Calculator extends Component {
             ['₡' + carne_total],
             ['₡' + total_a_pagar]
         ];
-        const { title, wrapper, row, text, head, text1, tableContainer, tableTextTitle } = styles;
+        const {
+            title,
+            wrapper,
+            row,
+            text,
+            head,
+            text1,
+            tableContainer,
+            tableTextTitle
+        } = styles;
         return (
             <View style={tableContainer}>
                 <Text style={tableTextTitle}>Pago de contado</Text>
@@ -276,7 +360,16 @@ class Calculator extends Component {
     }
 
     sendInformation() {
-        const { itemFormStyle, formCalc, mainContainerCalc, btnNextStyle, textBtnNextStyle, btnNextCalcStyle, titleForm, titleText } = styles;
+        const {
+            itemFormStyle,
+            formCalc,
+            mainContainerCalc,
+            btnNextStyle,
+            textBtnNextStyle,
+            btnNextCalcStyle,
+            titleForm,
+            titleText
+        } = styles;
         return (
             <View style={mainContainerCalc}>
                 <View style={titleForm}>
@@ -413,13 +506,34 @@ const styles = {
     itemFormStyle: {
         marginTop: 10
     },
-    container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
-    head: { height: 40, backgroundColor: '#f1f8ff' },
-    wrapper: { flexDirection: 'row' },
-    title: { flex: 1, backgroundColor: 'rgba(61, 196, 255, 0.9)', },
-    row: { height: 40 },
-    text: { textAlign: 'center', color: 'white' },
-    text1: { textAlign: 'center' },
+    container: {
+        flex: 1,
+        padding: 16,
+        paddingTop: 30,
+        backgroundColor: '#fff'
+    },
+    head: {
+        height: 40,
+        backgroundColor: '#f1f8ff'
+    },
+    wrapper: {
+        flexDirection: 'row'
+    },
+    title: {
+        flex: 1,
+        backgroundColor:
+            'rgba(61, 196, 255, 0.9)',
+    },
+    row: {
+        height: 40
+    },
+    text: {
+        textAlign: 'center',
+        color: 'white'
+    },
+    text1: {
+        textAlign: 'center'
+    },
     tableContainer: {
         padding: 15
     },

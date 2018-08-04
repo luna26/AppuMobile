@@ -1,0 +1,1 @@
+export const SERVER_DIR = 'http://34.219.69.51';

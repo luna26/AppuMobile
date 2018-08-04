@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Linking  } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import { getSpecificCareer } from '../../actions';
+import { SERVER_DIR } from '../../Config';
 
 class BlurSectionCarrer extends Component {
     componentWillMount() {
@@ -19,21 +20,29 @@ class BlurSectionCarrer extends Component {
         );
     }
 
-    onClickPlan(planUrl){
-        let plaUrlServer = 'http://34.219.69.51/' + planUrl;
+    onClickPlan(planUrl) {
+        let plaUrlServer = SERVER_DIR + planUrl;
         Linking.canOpenURL(plaUrlServer).then(supported => {
             if (supported) {
-              Linking.openURL(plaUrlServer);
+                Linking.openURL(plaUrlServer);
             } else {
-              console.log("Don't know how to open URI: " + plaUrlServer);
+                console.log("Don't know how to open URI: " + plaUrlServer);
             }
-          });
+        });
     }
 
     renderInfoCareer() {
         if (this.props.objCareer) {
-            console.log(this.props.objCareer[0], 'this.props.objCareer[0]');
-            const { styleTextButton, styleTitleText, buttoStyle, mainContainer, infoContainer, containerTitle, containerDesc, styleDescText, containerButton } = styles;
+            const { styleTextButton,
+                styleTitleText,
+                buttoStyle,
+                mainContainer,
+                infoContainer,
+                containerTitle,
+                containerDesc,
+                styleDescText,
+                containerButton
+            } = styles;
             return (
                 <View style={mainContainer}>
                     <View style={infoContainer}>
@@ -57,10 +66,10 @@ class BlurSectionCarrer extends Component {
                 </View>
             );
         } else {
-            const {onLoadContainer} = styles;
+            const { onLoadContainer } = styles;
             return (
                 <View style={onLoadContainer}>
-                     <ActivityIndicator size="large" color="rgba(61, 196, 255, 0.9)" />
+                    <ActivityIndicator size="large" color="rgba(61, 196, 255, 0.9)" />
                 </View>
             );
         }
@@ -87,44 +96,36 @@ const styles = {
     styleTitleText: {
         fontSize: 22
     },
-    styleDescText:{
-
-    },
     mainContainer: {
-        flex:1
+        flex: 1
     },
     infoContainer: {
-        marginTop:15,
-        paddingLeft:15,
-        flex:85
+        marginTop: 15,
+        paddingLeft: 15,
+        flex: 85
     },
-    containerDesc:{
-        marginTop:20,
+    containerDesc: {
+        marginTop: 20,
     },
-    containerButton:{
-        flex:15,
-        justifyContent:'center',
-        borderTopColor: '#179bd7',
-        borderTopWidth: 1,
+    containerButton: {
+        flex: 15,
+        justifyContent: 'center',
     },
-    containerTitle:{
-    
+    buttoStyle: {
+        height: 50,
+        justifyContent: 'center',
+        borderRadius: 15,
+        backgroundColor: '#179bd7',
+        marginLeft: 15,
+        marginRight: 15
     },
-    buttoStyle:{
-        height:50,
-        justifyContent:'center',
-        borderRadius:15,
-        backgroundColor:'#179bd7',
-        marginLeft:15,
-        marginRight:15
+    styleTextButton: {
+        textAlign: 'center',
+        color: 'white'
     },
-    styleTextButton:{
-        textAlign:'center',
-        color:'white'
-    },
-    onLoadContainer:{
-        justifyContent:'center',
-        flex:1
+    onLoadContainer: {
+        justifyContent: 'center',
+        flex: 1
     }
 }
 
