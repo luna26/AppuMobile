@@ -241,11 +241,11 @@ class Calculator extends Component {
         const { btnNextStyle, textBtnNextStyle } = styles;
         if (this.state.arrayCoursesSelected.length != 0) {
             return (
-                <View style={btnNextStyle}>
-                    <TouchableOpacity onPress={this.changeStep.bind(this, 2)}>
+                <TouchableOpacity onPress={this.changeStep.bind(this, 2)} style={btnNextStyle}>
+                    <View onPress={this.changeStep.bind(this, 2)}>
                         <Text style={textBtnNextStyle}>Siguiente</Text>
-                    </TouchableOpacity>
-                </View>
+                    </View>
+                </TouchableOpacity>
             );
         } else {
             return (
@@ -487,16 +487,12 @@ class Calculator extends Component {
                         />
                     </View>
                 </ScrollView>
-                <View style={[btnNextStyle, btnNextCalcStyle]}>
-                    <TouchableOpacity onPress={this.changeStep.bind(this, 1)}>
+                <TouchableOpacity onPress={this.changeStep.bind(this, 1)} style={[btnNextStyle, btnNextCalcStyle]}>
                         <Text style={textBtnNextStyle}>Volver a seleccion de materias</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={[btnNextStyle, btnNextCalcStyle]}>
-                    <TouchableOpacity onPress={this.onPressCalc.bind(this)}>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.onPressCalc.bind(this)} style={[btnNextStyle, btnNextCalcStyle]}>
                         <Text style={textBtnNextStyle}>Calcular</Text>
-                    </TouchableOpacity>
-                </View>
+                </TouchableOpacity>
             </View>
         );
     }
