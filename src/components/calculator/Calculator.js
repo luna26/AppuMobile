@@ -76,26 +76,49 @@ class Calculator extends Component {
     }
 
     renderPickerForIOS() {
-        return (
-            <View>
-                <Text onPress={this.showActionSheet}>Open ActionSheet</Text>
-                <ActionSheet
-                    ref={o => this.ActionSheet = o}
-                    title={'Seleccione su carrera'}
-                    options={['Apple', 'Banana', 'cancel']}
-                    cancelButtonIndex={2}
-                    destructiveButtonIndex={1}
-                    onPress={(index) => { 
-                        this.actionsSheetIOSonPress.bind(this, index);
-                     }}
-                />
-            </View>
-        );
+        if (this.props.calculator.careersCalculator) {
+            let {arrayTitles, arrayCareers, indexCancel} = this.returnArrayTitle();
+
+            return (
+                <View>
+                    <Text onPress={() => { this.ActionSheet.show() }}>Seleccione su carrera</Text>
+                    <ActionSheet
+                        ref={o => this.ActionSheet = o}
+                        title={'Seleccione su carrera'}
+                        options={arrayTitles}
+                        cancelButtonIndex={indexCancel}
+                        destructiveButtonIndex={indexCancel}
+                        onPress={this.actionsSheetIOSonPress.bind(this, arrayCareers)}
+                    />
+                </View>
+            );
+        }
     }
 
-    actionsSheetIOSonPress(index){
-        console.log(index, 'index');
-        this.sendCareerSelected(index);
+    actionsSheetIOSonPress(array, index) {
+        if(array[index]){
+            this.sendCareerSelected(array[index].value);
+        }
+    }
+
+    returnArrayTitle(){
+        let arrayTitles = [];
+        let arrayCareers = [];
+        let indexCancel;
+
+        this.props.calculator.careersCalculator.map(function(item, index){
+            arrayTitles[index] = item.careers_title;
+
+            arrayCareers[index] = {
+                    value:item.careers_id
+            }
+            
+        }.bind(this));
+
+        indexCancel = arrayTitles.length + 1;
+        arrayTitles[indexCancel] = 'Cancel';
+
+        return {arrayTitles, arrayCareers, indexCancel};
     }
 
     checkboxCoursesChange(data, index) {
@@ -224,7 +247,6 @@ class Calculator extends Component {
         } = styles;
         if (this.props.calculator.costs) {
             const { valor_por_credito, creditos_seleccionados } = this.props.calculator.costs.credito;
-            console.log(this.props.calculator.costs, 'this.props.calculator.costs');
             return (
                 <View style={[mainContainerCalc]}>
                     <ScrollView style={{ flex: .94 }}>
