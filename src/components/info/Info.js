@@ -6,19 +6,36 @@ import call from 'react-native-phone-call'
 import { View, Text, ScrollView, ActivityIndicator, TouchableOpacity, ImageBackground, Linking, Platform, Image } from 'react-native';
 import Menu from '../menu/menu';
 import Header from '../header/header';
+import { showLocation } from 'react-native-map-link';
+
 
 class Info extends Component {
     componentWillMount() {
         this.props.getInfo();
     }
+    
+    openMap(){
+        showLocation({
+            latitude: 10.019339,
+            longitude: -84.219206,
+            title: 'UCEM', 
+            googleForceLatLon: false,
+            googlePlaceId: 'ChIJVXqv2M_5oI8ReghxpawYMMM', 
+            dialogTitle: 'Ver ubicación de la UCEM',
+            dialogMessage: 'Cuál aplicación desea utilizar?',
+            cancelText: 'Cancelar', 
+        })
+    }
+    
 
-    openMap() {
+    /*openMap() {
         if (Platform.OS === 'android') {
             openMap({ latitude: 10.019339, longitude: -84.219206 });
         } else {
             Linking.openURL('https://maps.apple.com/?daddr=10.019339,-84.219206');
         }
-    }
+    }*/
+
 
 
     returnViewLocation() {
