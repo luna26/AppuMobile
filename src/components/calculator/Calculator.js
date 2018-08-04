@@ -2,9 +2,29 @@ import React, { Component } from 'react';
 import ActionSheet from 'react-native-actionsheet';
 import CheckBox from 'react-native-check-box';
 import { connect } from 'react-redux';
-import { onLoadCareersCalc, getCoursesCarrer, requestCalc } from '../../actions';
-import { View, Text, TouchableOpacity, Picker, ActivityIndicator, ScrollView, TextInput, Platform } from 'react-native';
-import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-component';
+import {
+    onLoadCareersCalc,
+    getCoursesCarrer,
+    requestCalc,
+    clearArrayCosts
+} from '../../actions';
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    Picker,
+    ActivityIndicator,
+    ScrollView,
+    TextInput,
+    Platform
+} from 'react-native';
+import {
+    Table,
+    TableWrapper,
+    Row,
+    Rows,
+    Col
+} from 'react-native-table-component';
 import Header from '../header/header';
 import Menu from '../menu/menu';
 
@@ -60,10 +80,10 @@ class Calculator extends Component {
         }
     }
 
-    renderToChangeIOS(){
+    renderToChangeIOS() {
         let careerName;
-        this.props.calculator.careersCalculator.map(function(item, index){
-            if(item.careers_id == this.state.careerSelected){
+        this.props.calculator.careersCalculator.map(function (item, index) {
+            if (item.careers_id == this.state.careerSelected) {
                 careerName = item.careers_title;
             }
         }.bind(this));
@@ -104,8 +124,7 @@ class Calculator extends Component {
     renderPickerForIOS() {
         if (this.props.calculator.careersCalculator) {
             let { arrayTitles, arrayCareers, indexCancel } = this.returnArrayTitle();
-            const {IOSPickerStyle, IOSPickerStyleText} = styles;
-            console.log(arrayTitles, 'arrayTitles');
+            const { IOSPickerStyle, IOSPickerStyleText } = styles;
             if (arrayTitles.length != 0) {
                 return (
                     <View>
@@ -282,13 +301,13 @@ class Calculator extends Component {
             return (
                 <View style={[mainContainerCalc]}>
                     <ScrollView style={{ flex: .94 }}>
-                        <Text style={textInfoTable}>Valor por credito: ₡{valor_por_credito}</Text>
                         <Text style={textInfoTable}>Creditos seleccionados: {creditos_seleccionados}</Text>
+                        <Text style={textInfoTable}>Valor por credito: ₡{valor_por_credito}</Text>
                         {this.returnTableCash()}
                         {this.returnTableCredit()}
                     </ScrollView>
-                    <View style={[btnNextStyle, { flex: .06 }]}>
-                        <TouchableOpacity onPress={this.changeStep.bind(this, 1)}>
+                    <View style={[btnNextStyle, { flex: .06, justifyContent:'center' }]}>
+                        <TouchableOpacity style={{justifyContent:'center'}} onPress={this.changeStep.bind(this, 1)}>
                             <Text style={textBtnNextStyle}>Volver a seleccion de materias</Text>
                         </TouchableOpacity>
                     </View>
@@ -339,9 +358,10 @@ class Calculator extends Component {
         } = styles;
         return (
             <View style={tableContainer}>
-                <Text style={tableTextTitle}>Pago a credito</Text>
+                <View style={{ padding: 7, backgroundColor: '#3dc4ff' }}>
+                    <Text style={tableTextTitle}>Pago a credito</Text>
+                </View>
                 <Table>
-                    {/* <Row data={tableHead} flexArr={[1, 2, 1, 1]} style={head} textStyle={text} /> */}
                     <TableWrapper style={wrapper}>
                         <Col data={tableTitle} style={title} heightArr={[40, 40]} textStyle={text} />
                         <Rows data={tableData} flexArr={[1]} style={row} textStyle={text1} />
@@ -383,9 +403,10 @@ class Calculator extends Component {
         } = styles;
         return (
             <View style={tableContainer}>
-                <Text style={tableTextTitle}>Pago de contado</Text>
+                <View style={{ padding: 7, backgroundColor: '#3dc4ff' }}>
+                    <Text style={tableTextTitle}>Pago de contado</Text>
+                </View>
                 <Table>
-                    {/* <Row data={tableHead} flexArr={[1, 2, 1, 1]} style={head} textStyle={text} /> */}
                     <TableWrapper style={wrapper}>
                         <Col data={tableTitle} style={title} heightArr={[40, 40]} textStyle={text} />
                         <Rows data={tableData} flexArr={[1]} style={row} textStyle={text1} />
@@ -471,6 +492,7 @@ class Calculator extends Component {
     onPressCalc() {
         this.props.requestCalc(this.state.name, this.state.email, this.state.tel, this.state.arrayCoursesSelected);
         this.changeStep(3);
+        this.props.clearArrayCosts();
     }
 
     render() {
@@ -488,7 +510,8 @@ const styles = {
     mainContainerCalc: {
         backgroundColor: 'white',
         flex: 1,
-        position: 'relative'
+        position: 'relative',
+        justifyContent:'center'
     },
     mainText: {
         fontSize: 18,
@@ -593,19 +616,20 @@ const styles = {
     },
     tableTextTitle: {
         fontSize: 18,
-        textAlign: 'center'
+        textAlign: 'center',
+        color: 'white'
     },
     textInfoTable: {
         marginTop: 15,
         marginLeft: 15,
         fontSize: 18
     },
-    IOSPickerStyle:{
-        backgroundColor:'rgba(61, 196, 255, 0.9)',
-        padding:10
+    IOSPickerStyle: {
+        backgroundColor: 'rgba(61, 196, 255, 0.9)',
+        padding: 10
     },
-    IOSPickerStyleText:{
-        color:'white'
+    IOSPickerStyleText: {
+        color: 'white'
     }
 }
 
@@ -615,4 +639,9 @@ const mapStateToProps = ({ calculator }) => {
     };
 };
 
-export default connect(mapStateToProps, { onLoadCareersCalc, getCoursesCarrer, requestCalc })(Calculator);
+export default connect(mapStateToProps, {
+    onLoadCareersCalc,
+    getCoursesCarrer,
+    requestCalc,
+    clearArrayCosts
+})(Calculator);

@@ -1,5 +1,4 @@
 // DASHBOARD
-
 export const LOAD_NEWS = 'load_news';
 export const NEWS_LOADING = 'news_loading';
 export const LOAD_MORE_NEWS = 'load_more_news';
@@ -21,3 +20,4 @@ export const ON_LOAD_CAREERS_CALC = 'on_load_calculator';
 export const ON_LOAD_COURSES_CALC = 'on_load_courses_calc';
 export const ON_LOAD_CALC_COST = 'on_load_calc-cost';
 export const ON_LOADING_CALC_COST = 'on_loading_calc_cost';
+export const ON_CLEAR_ARRAY_COSTS = 'on_clear_array_costs';

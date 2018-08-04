@@ -1,7 +1,8 @@
 import {
     ON_LOAD_CAREERS_CALC,
     ON_LOAD_COURSES_CALC,
-    ON_LOAD_CALC_COST
+    ON_LOAD_CALC_COST,
+    ON_CLEAR_ARRAY_COSTS
 } from './types';
 import axios from 'axios';
 
@@ -55,5 +56,14 @@ export const requestCalc = (name, email, tel, courses) => {
             .catch(function (error) {
                 console.log(error);
             });
+    }
+}
+
+export const clearArrayCosts = () =>{
+    return dispatch => {
+        dispatch({
+            type: ON_CLEAR_ARRAY_COSTS,
+            payload: null
+        });
     }
 }
