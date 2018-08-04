@@ -21,3 +21,4 @@ export const ON_LOAD_COURSES_CALC = 'on_load_courses_calc';
 export const ON_LOAD_CALC_COST = 'on_load_calc-cost';
 export const ON_LOADING_CALC_COST = 'on_loading_calc_cost';
 export const ON_CLEAR_ARRAY_COSTS = 'on_clear_array_costs';
+export const ALL_FIELD_ARE_REQUIRED = 'all_field_are_required';

@@ -6,7 +6,8 @@ import {
     onLoadCareersCalc,
     getCoursesCarrer,
     requestCalc,
-    clearArrayCosts
+    clearArrayCosts,
+    allFiledAreRequired
 } from '../../actions';
 import {
     View,
@@ -306,8 +307,8 @@ class Calculator extends Component {
                         {this.returnTableCash()}
                         {this.returnTableCredit()}
                     </ScrollView>
-                    <View style={[btnNextStyle, { flex: .06, justifyContent:'center' }]}>
-                        <TouchableOpacity style={{justifyContent:'center'}} onPress={this.changeStep.bind(this, 1)}>
+                    <View style={[btnNextStyle, { flex: .06, justifyContent: 'center' }]}>
+                        <TouchableOpacity style={{ justifyContent: 'center' }} onPress={this.changeStep.bind(this, 1)}>
                             <Text style={textBtnNextStyle}>Volver a seleccion de materias</Text>
                         </TouchableOpacity>
                     </View>
@@ -434,6 +435,16 @@ class Calculator extends Component {
         });
     }
 
+    returnValidInfoText() {
+        if (this.props.calculator.fieldsRequired) {
+            return (
+                <View style={{justifyContent:'center', marginTop:10}}>
+                    <Text style={{color:'red'}}>Todos los campos son requeridos</Text>
+                </View>
+            );
+        }
+    }
+
     sendInformation() {
         const {
             itemFormStyle,
@@ -447,6 +458,7 @@ class Calculator extends Component {
         } = styles;
         return (
             <View style={mainContainerCalc}>
+                {this.returnValidInfoText()}
                 <View style={titleForm}>
                     <Text style={titleText}>Ingrese la informacion solicitada</Text>
                 </View>
@@ -490,9 +502,36 @@ class Calculator extends Component {
     }
 
     onPressCalc() {
-        this.props.requestCalc(this.state.name, this.state.email, this.state.tel, this.state.arrayCoursesSelected);
-        this.changeStep(3);
-        this.props.clearArrayCosts();
+        if (this.validateFields(this.state.name, this.state.email, this.state.tel)) {
+            this.props.requestCalc(this.state.name, this.state.email, this.state.tel, this.state.arrayCoursesSelected);
+            this.changeStep(3);
+            this.props.clearArrayCosts();
+            this.props.allFiledAreRequired(false);
+        } else {
+            this.props.allFiledAreRequired(true);
+        }
+    }
+
+    validateFields(name, email, tel) {
+        let validationArray = [];
+        let valid = true;
+
+        if (name.length == 0) {
+            validationArray.push(false);
+        } else if (email.length == 0) {
+            validationArray.push(false);
+        } else if (tel.length == 0) {
+            validationArray.push(false);
+        }
+
+        for (x = 0; x < validationArray.length; x++) {
+            if (validationArray[x] == false) {
+                valid = false;
+            }
+        }
+
+        return valid;
+
     }
 
     render() {
@@ -511,7 +550,7 @@ const styles = {
         backgroundColor: 'white',
         flex: 1,
         position: 'relative',
-        justifyContent:'center'
+        justifyContent: 'center'
     },
     mainText: {
         fontSize: 18,
@@ -643,5 +682,6 @@ export default connect(mapStateToProps, {
     onLoadCareersCalc,
     getCoursesCarrer,
     requestCalc,
-    clearArrayCosts
+    clearArrayCosts,
+    allFiledAreRequired
 })(Calculator);

@@ -2,7 +2,8 @@ import {
     ON_LOAD_CAREERS_CALC,
     ON_LOAD_COURSES_CALC,
     ON_LOAD_CALC_COST,
-    ON_CLEAR_ARRAY_COSTS
+    ON_CLEAR_ARRAY_COSTS,
+    ALL_FIELD_ARE_REQUIRED
 } from './types';
 import axios from 'axios';
 
@@ -64,6 +65,15 @@ export const clearArrayCosts = () =>{
         dispatch({
             type: ON_CLEAR_ARRAY_COSTS,
             payload: null
+        });
+    }
+}
+
+export const allFiledAreRequired = (validation) =>{
+    return dispatch => {
+        dispatch({
+            type: ALL_FIELD_ARE_REQUIRED,
+            payload: validation
         });
     }
 }
