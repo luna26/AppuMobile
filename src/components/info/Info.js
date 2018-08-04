@@ -24,10 +24,10 @@ class Info extends Component {
             dialogTitle: 'Ver ubicación de la UCEM', // optional (default: 'Open in Maps')
             dialogMessage: 'Cuál aplicación desea utilizar?', // optional (default: 'What app would you like to use?')
             cancelText: 'Cancelar', // optional (default: 'Cancel')
-            appsWhiteList: ['google-maps'], // optionally you can set which apps to show (default: will show all supported apps installed on device)
-            app: 'uber', // optionally specify specific app to use
-            app: 'waze',
-            app: 'apple-maps',
+            //appsWhiteList: ['google-maps'], // optionally you can set which apps to show (default: will show all supported apps installed on device)
+            //app: 'uber', // optionally specify specific app to use
+            //app: 'waze',
+            //app: 'apple-maps',
         })
     }
     
