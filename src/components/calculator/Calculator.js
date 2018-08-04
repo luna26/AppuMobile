@@ -56,7 +56,7 @@ class Calculator extends Component {
     renderToChange() {
         if (this.props.calculator.courses.length != 0 && this.state.careerSelected != 'default') {
             return (
-                <Text style={{color:'#3dc4ff'}}>Cambiar carrera</Text>
+                <Text style={{ color: '#3dc4ff' }}>Cambiar carrera</Text>
             );
         }
     }
@@ -68,7 +68,7 @@ class Calculator extends Component {
         } = styles;
 
         return (
-            <View style={{marginBottom:10}}>
+            <View style={{ marginBottom: 10 }}>
                 {this.renderToChange()}
                 <Picker
                     selectedValue={this.state.careerSelected}
@@ -91,19 +91,21 @@ class Calculator extends Component {
         if (this.props.calculator.careersCalculator) {
             let { arrayTitles, arrayCareers, indexCancel } = this.returnArrayTitle();
             console.log(arrayTitles, 'arrayTitles');
-            return (
-                <View>
-                    <Text onPress={() => { this.ActionSheet.show() }}>Seleccione su carrera</Text>
-                    <ActionSheet
-                        ref={o => this.ActionSheet = o}
-                        title={'Seleccione su carrera'}
-                        options={arrayTitles}
-                        cancelButtonIndex={indexCancel}
-                        destructiveButtonIndex={indexCancel}
-                        onPress={this.actionsSheetIOSonPress.bind(this, arrayCareers)}
-                    />
-                </View>
-            );
+            if(arrayTitles.length != 0){
+                return (
+                    <View>
+                        <Text onPress={() => { this.ActionSheet.show() }}>Seleccione su carrera</Text>
+                        <ActionSheet
+                            ref={o => this.ActionSheet = o}
+                            title={'Seleccione su carrera'}
+                            options={arrayTitles}
+                            cancelButtonIndex={indexCancel}
+                            destructiveButtonIndex={indexCancel}
+                            onPress={this.actionsSheetIOSonPress.bind(this, arrayCareers)}
+                        />
+                    </View>
+                );
+            }
         }
     }
 
