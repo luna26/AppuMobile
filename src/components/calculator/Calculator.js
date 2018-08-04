@@ -46,8 +46,7 @@ class Calculator extends Component {
 
     renderPickerCareer() {
         if (Platform.OS === 'android') {
-            //return this.renderPickerForAndroid();
-            return this.renderPickerForIOS();
+            return this.renderPickerForAndroid();
         } else if (Platform.OS === 'ios') {
             return this.renderPickerForIOS();
         }
@@ -57,6 +56,21 @@ class Calculator extends Component {
         if (this.props.calculator.courses.length != 0 && this.state.careerSelected != 'default') {
             return (
                 <Text style={{ color: '#3dc4ff' }}>Cambiar carrera</Text>
+            );
+        }
+    }
+
+    renderToChangeIOS(){
+        let careerName;
+        this.props.calculator.careersCalculator.map(function(item, index){
+            if(item.careers_id == this.state.careerSelected){
+                careerName = item.careers_title;
+            }
+        }.bind(this));
+
+        if (this.props.calculator.courses.length != 0 && this.state.careerSelected != 'default') {
+            return (
+                <Text style={{ color: '#3dc4ff' }}>{careerName}</Text>
             );
         }
     }
@@ -90,11 +104,15 @@ class Calculator extends Component {
     renderPickerForIOS() {
         if (this.props.calculator.careersCalculator) {
             let { arrayTitles, arrayCareers, indexCancel } = this.returnArrayTitle();
+            const {IOSPickerStyle, IOSPickerStyleText} = styles;
             console.log(arrayTitles, 'arrayTitles');
-            if(arrayTitles.length != 0){
+            if (arrayTitles.length != 0) {
                 return (
                     <View>
-                        <Text onPress={() => { this.ActionSheet.show() }}>Seleccione su carrera</Text>
+                        {this.renderToChangeIOS()}
+                        <View style={IOSPickerStyle}>
+                            <Text style={IOSPickerStyleText} onPress={() => { this.ActionSheet.show() }}>Seleccione su carrera</Text>
+                        </View>
                         <ActionSheet
                             ref={o => this.ActionSheet = o}
                             title={'Seleccione su carrera'}
@@ -121,7 +139,7 @@ class Calculator extends Component {
         let indexCancel;
 
         this.props.calculator.careersCalculator.map(function (item, index) {
-            arrayTitles[index] = JSON.stringify(item.careers_title);
+            arrayTitles[index] = item.careers_title;
 
             arrayCareers[index] = {
                 value: item.careers_id
@@ -129,7 +147,7 @@ class Calculator extends Component {
 
         }.bind(this));
 
-        indexCancel = arrayTitles.length + 1;
+        indexCancel = arrayTitles.length;
         arrayTitles[indexCancel] = JSON.stringify('Cancel');
 
         return { arrayTitles, arrayCareers, indexCancel };
@@ -581,6 +599,13 @@ const styles = {
         marginTop: 15,
         marginLeft: 15,
         fontSize: 18
+    },
+    IOSPickerStyle:{
+        backgroundColor:'rgba(61, 196, 255, 0.9)',
+        padding:10
+    },
+    IOSPickerStyleText:{
+        color:'white'
     }
 }
 
