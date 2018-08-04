@@ -46,9 +46,18 @@ class Calculator extends Component {
 
     renderPickerCareer() {
         if (Platform.OS === 'android') {
-            return this.renderPickerForAndroid();
+            //return this.renderPickerForAndroid();
+            return this.renderPickerForIOS();
         } else if (Platform.OS === 'ios') {
             return this.renderPickerForIOS();
+        }
+    }
+
+    renderToChange() {
+        if (this.props.calculator.courses.length != 0 && this.state.careerSelected != 'default') {
+            return (
+                <Text style={{color:'#3dc4ff'}}>Cambiar carrera</Text>
+            );
         }
     }
 
@@ -59,26 +68,29 @@ class Calculator extends Component {
         } = styles;
 
         return (
-            <Picker
-                selectedValue={this.state.careerSelected}
-                style={{ height: 50, width: '100%' }}
-                onValueChange={this.sendCareerSelected.bind(this)}>
-                <Picker.Item key={'unselectable'} label={'Seleccione su carrera'} value={'default'} />
-                {
-                    this.props.calculator.careersCalculator.map(function (item, index) {
-                        return (
-                            <Picker.Item label={item.careers_title} value={item.careers_id} key={index} />
-                        )
-                    }.bind(this))
-                }
-            </Picker>
+            <View style={{marginBottom:10}}>
+                {this.renderToChange()}
+                <Picker
+                    selectedValue={this.state.careerSelected}
+                    style={{ height: 50, width: '100%', backgroundColor: '#3dc4ff', color: 'white', borderRadius: 10 }}
+                    onValueChange={this.sendCareerSelected.bind(this)}>
+                    <Picker.Item key={'unselectable'} label={'Seleccione su carrera'} value={'default'} />
+                    {
+                        this.props.calculator.careersCalculator.map(function (item, index) {
+                            return (
+                                <Picker.Item label={item.careers_title} value={item.careers_id} key={index} />
+                            )
+                        }.bind(this))
+                    }
+                </Picker>
+            </View>
         );
     }
 
     renderPickerForIOS() {
         if (this.props.calculator.careersCalculator) {
-            let {arrayTitles, arrayCareers, indexCancel} = this.returnArrayTitle();
-
+            let { arrayTitles, arrayCareers, indexCancel } = this.returnArrayTitle();
+            console.log(arrayTitles, 'arrayTitles');
             return (
                 <View>
                     <Text onPress={() => { this.ActionSheet.show() }}>Seleccione su carrera</Text>
@@ -96,29 +108,29 @@ class Calculator extends Component {
     }
 
     actionsSheetIOSonPress(array, index) {
-        if(array[index]){
+        if (array[index]) {
             this.sendCareerSelected(array[index].value);
         }
     }
 
-    returnArrayTitle(){
+    returnArrayTitle() {
         let arrayTitles = [];
         let arrayCareers = [];
         let indexCancel;
 
-        this.props.calculator.careersCalculator.map(function(item, index){
-            arrayTitles[index] = item.careers_title;
+        this.props.calculator.careersCalculator.map(function (item, index) {
+            arrayTitles[index] = JSON.stringify(item.careers_title);
 
             arrayCareers[index] = {
-                    value:item.careers_id
+                value: item.careers_id
             }
-            
+
         }.bind(this));
 
         indexCancel = arrayTitles.length + 1;
-        arrayTitles[indexCancel] = 'Cancel';
+        arrayTitles[indexCancel] = JSON.stringify('Cancel');
 
-        return {arrayTitles, arrayCareers, indexCancel};
+        return { arrayTitles, arrayCareers, indexCancel };
     }
 
     checkboxCoursesChange(data, index) {
