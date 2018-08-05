@@ -81,6 +81,7 @@ class Info extends Component {
     renderInfo() {
         if (this.props.info.infoObj) {
             const { containerInfoText } = styles;
+            console.log(this.props.info.infoObj, 'this.props.info.infoObj');
             return (
                 <ScrollView style={containerInfoText}>
                     <Text>
@@ -113,7 +114,8 @@ const styles = {
         marginRight: 10,
         paddingLeft: 10,
         paddingTop: 15,
-        paddingRight: 10
+        paddingRight: 10,
+        paddingBottom:15
     },
     styleBtnMap: {
         flex: .2,

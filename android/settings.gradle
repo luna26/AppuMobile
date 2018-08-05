@@ -1,3 +1,3 @@
-rootProject.name = 'appu'
+rootProject.name = 'UCEM'
 
 include ':app'
