@@ -1,9 +1,10 @@
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 
 export const goHome = (text) => {
     return dispatch => {
         setTimeout(function(){
+            Actions.pop();
             Actions.home();
-        }, 3000);
+        }.bind(this), 3000);
     };
 }

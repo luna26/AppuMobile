@@ -134,6 +134,12 @@ android {
             }
         }
     }
+
+    aaptOptions {
+        cruncherEnabled = false
+        useNewCruncher false
+    }
+
 }
 
 dependencies {
