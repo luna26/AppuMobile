@@ -34,14 +34,19 @@ class News extends Component {
 
     renderRow(newItem) {
         const SERVER_URL = 'http://34.219.69.51';
-        return <NewItem imageUrl={SERVER_URL + newItem.news_url_image} titleNew={newItem.news_title} dateNew={newItem.news_date} descNew={newItem.news_desc} />;
+        return <NewItem
+            imageUrl={SERVER_URL + newItem.news_url_image}
+            titleNew={newItem.news_title}
+            dateNew={newItem.news_date}
+            descNew={newItem.news_desc}
+        />;
     }
 
     renderNews(newsObj) {
         if (this.dataSource) {
             return (
                 <ListView
-                    removeClippedSubviews={true}
+                    removeClippedSubviews={false}
                     enableEmptySections
                     dataSource={this.dataSource}
                     renderRow={this.renderRow}
@@ -90,7 +95,7 @@ class News extends Component {
         const { contianerNewsStyle, arrowUpStyle } = styles;
         const { news } = this.props;
         return (
-            <View style={{ position: 'relative', marginLeft:8, marginRight:8, flex:1 }}>
+            <View style={{ position: 'relative', marginLeft: 8, marginRight: 8, flex: 1 }}>
                 {this.renderNews(this.props.news)}
             </View>
         );
@@ -105,8 +110,8 @@ const styles = {
         position: 'relative',
     },
     containerActivity: {
-        justifyContent:'center',
-        flex:1,
+        justifyContent: 'center',
+        flex: 1,
         backgroundColor: 'white',
     },
     styleLoadMore: {

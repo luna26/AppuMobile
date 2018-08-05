@@ -16,11 +16,11 @@ class Home extends Component {
     }
 
     render() {
-        const { containerStyle, container1, container2, arrowUpStyle, imageUp } = styles;
+        const { containerStyle } = styles;
         return (
             <View style={containerStyle}>
                 <Header />
-                <View style={{flex:1}}>
+                <View style={containerStyle}>
                     <News />
                 </View>
                 <Menu indexSelected={this.setIndexSelected()} />
@@ -32,15 +32,6 @@ class Home extends Component {
 const styles = {
     containerStyle: {
         flex: 1
-    },
-    arrowUpStyle: {
-        position: 'absolute',
-        bottom: 0,
-        right: 0
-    },
-    imageUp: {
-        width: 50,
-        height: 50
     }
 }
 
