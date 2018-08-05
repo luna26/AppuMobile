@@ -1,10 +1,10 @@
 import { ON_LOAD_INFO } from './types';
 import axios from 'axios';
-
+import { SERVER_DIR } from '../Config';
 
 export const getInfo = () => {
     return dispatch => {
-        axios.post('http://34.219.69.51/getInfo')
+        axios.post(SERVER_DIR+'/getInfo')
             .then(function (response) {
                 console.log(response);
                 setTimeout(function () {

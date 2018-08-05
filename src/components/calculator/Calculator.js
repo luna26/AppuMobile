@@ -17,7 +17,7 @@ import {
     ActivityIndicator,
     ScrollView,
     TextInput,
-    Platform
+    Platform 
 } from 'react-native';
 import {
     Table,

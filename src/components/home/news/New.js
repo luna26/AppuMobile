@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, ActivityIndicator, Image, ListView } from 'react-native';
+import {
+    Text,
+    View,
+    ScrollView,
+    ActivityIndicator,
+    Image,
+    ListView,
+    Platform
+} from 'react-native';
 import { connect } from 'react-redux';
 import { loadNewsRequest } from '../../../actions';
 import NewItem from './NewItem';
+import { SERVER_DIR } from '../../../Config';
 
 class News extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            loadMore: false,
-            sizeScroll: 0
-        };
+            showLoaderMoreNews: false
+        }
     }
-
     componentDidMount() {
         if (this.props.news.length == 0) {
             this.props.loadNewsRequest(this.props.skip);
@@ -25,6 +32,10 @@ class News extends Component {
     }
 
     createDataSource({ news }) {
+        this.setState({
+            showLoaderMoreNews: false
+        });
+        
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
@@ -33,20 +44,30 @@ class News extends Component {
     }
 
     renderRow(newItem) {
-        const SERVER_URL = 'http://34.219.69.51';
-        return <NewItem
-            imageUrl={SERVER_URL + newItem.news_url_image}
-            titleNew={newItem.news_title}
-            dateNew={newItem.news_date}
-            descNew={newItem.news_desc}
-        />;
+        const SERVER_URL = SERVER_DIR;
+        return (
+            <NewItem
+                imageUrl={SERVER_URL + newItem.news_url_image}
+                titleNew={newItem.news_title}
+                dateNew={newItem.news_date}
+                descNew={newItem.news_desc}
+            />
+        );
+    }
+
+    removeClippedSubviews() {
+        if (Platform.OS === 'android') {
+            return true;
+        } else if (Platform.OS === 'ios') {
+            return false;
+        }
     }
 
     renderNews(newsObj) {
         if (this.dataSource) {
             return (
                 <ListView
-                    removeClippedSubviews={false}
+                    removeClippedSubviews={this.removeClippedSubviews()}
                     enableEmptySections
                     dataSource={this.dataSource}
                     renderRow={this.renderRow}
@@ -63,29 +84,19 @@ class News extends Component {
         }
     }
 
-    isCloseToBottom({ layoutMeasurement, contentOffset, contentSize }) {
-        const paddingToBottom = 20;
-
-        if (this.state.sizeScroll != contentSize.height - paddingToBottom) {
-            this.setState({ sizeScroll: contentSize.height - paddingToBottom, loadMore: true });
-        }
-
-        return layoutMeasurement.height + contentOffset.y >=
-            contentSize.height - paddingToBottom;
-    };
-
     loadMoreNews() {
-        this.setState({ loadMore: false });
         this.props.loadNewsRequest(this.props.skip);
+        this.setState({
+            showLoaderMoreNews: true
+        });
     }
 
-    showLoaderMoreNews() {
-        if (this.props.loading_more_news) {
-            const { styleLoadMore, textLoadMore } = styles;
+    showLoaderMore() {
+        const { containerActivity } = styles;
+        if (this.state.showLoaderMoreNews) {
             return (
-                <View style={styleLoadMore}>
-                    <ActivityIndicator size="large" color="#fff" />
-                    <Text style={textLoadMore}>Cargando mas noticias</Text>
+                <View style={{bottom: 0 }}>
+                    <ActivityIndicator size="small" color="#3dc4ff" />
                 </View>
             );
         }
@@ -97,6 +108,7 @@ class News extends Component {
         return (
             <View style={{ position: 'relative', marginLeft: 8, marginRight: 8, flex: 1 }}>
                 {this.renderNews(this.props.news)}
+                {this.showLoaderMore()}
             </View>
         );
     }
@@ -137,9 +149,7 @@ const styles = {
 const mapStateToProps = (state) => {
     return {
         news: state.home.news,
-        skip: state.home.skip,
-        loading_more_news: state.home.loading_more_news,
-        moreNews: state.home.moreNews
+        skip: state.home.skip
     };
 };
 

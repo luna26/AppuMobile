@@ -3,8 +3,19 @@ import { Text, View, Image } from 'react-native';
 
 class NewItem extends Component {
     render() {
-        const { titleNew, dateNew, descNew, imageUrl } = this.props;
-        const { contianerNewsStyle, newStyle, textStyleNews, dateStyle, descStyle } = styles;
+        const {
+            titleNew,
+            dateNew,
+            descNew,
+            imageUrl
+        } = this.props;
+        const {
+            contianerNewsStyle,
+            newStyle,
+            textStyleNews,
+            dateStyle,
+            descStyle
+        } = styles;
         return (
             <View style={contianerNewsStyle}>
                 <Text style={textStyleNews}>{titleNew}</Text>
@@ -21,9 +32,9 @@ const styles = {
         flex: 1,
         marginBottom: 15,
         marginTop: 15,
-        paddingBottom:10,
-        backgroundColor:'white',
-        borderRadius:5,
+        paddingBottom: 10,
+        backgroundColor: 'white',
+        borderRadius: 5,
         borderColor: '#455A64',
         borderWidth: .5,
     },
@@ -38,16 +49,16 @@ const styles = {
         fontSize: 20,
         marginTop: 15,
         marginLeft: 15,
-        color:'black'
+        color: 'black'
     },
     dateStyle: {
         fontSize: 14,
         marginLeft: 15,
         marginBottom: 10
     },
-    descStyle:{
-        marginLeft:5,
-        marginTop:10
+    descStyle: {
+        marginLeft: 5,
+        marginTop: 10
     }
 }
 

@@ -1,5 +1,10 @@
 import React from 'react';
-import { View, Image, Text, StatusBar } from 'react-native';
+import {
+    View,
+    Image,
+    Text,
+    StatusBar
+} from 'react-native';
 
 const Header = () => {
     const {
@@ -15,7 +20,11 @@ const Header = () => {
                 barStyle="light-content"
             />
             <View style={containerLogo}>
-                <Image resizeMode='stretch' style={{ height: 150, width: 150 }} source={require('../../assets/images/Logo-ucem-2.png')} />
+                <Image
+                    resizeMode='stretch'
+                    style={{ height: 150, width: 150 }}
+                    source={require('../../assets/images/Logo-ucem-2.png')}
+                />
             </View>
             <View style={headerTextContainer}>
                 <Text style={headerText}>
@@ -32,8 +41,6 @@ const styles = {
         backgroundColor: 'white',
         height: 100,
         justifyContent: 'center',
-        // borderBottomColor: '#0288D1',
-        // borderBottomWidth: 30,
         backgroundColor: '#03A9F4'
 
     },
