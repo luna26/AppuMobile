@@ -55,7 +55,7 @@ class BlurSectionCarrer extends Component {
                     </View>
                     <View style={containerButton}>
                         <TouchableOpacity onPress={this.onClickPlan.bind(this, this.props.objCareer[0].careers_url_path)} style={buttoStyle}>
-                            <Text style={styleTextButton}>Plan de estudio</Text>
+                            <Text style={styleTextButton}>Plan de estudios</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={containerButton}>

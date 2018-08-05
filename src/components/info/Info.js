@@ -48,7 +48,7 @@ class Info extends Component {
             <TouchableOpacity onPress={this.openMap} style={styleBtnMap}>
                 <ImageBackground source={require('../../assets/images/map.png')} style={mapImage}>
                     <View style={containerBtnText}>
-                        <Text style={textBtnMap}>Ubicacion</Text>
+                        <Text style={textBtnMap}>Ubicación</Text>
                     </View>
                 </ImageBackground >
             </TouchableOpacity>
