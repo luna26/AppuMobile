@@ -28,7 +28,7 @@ class Info extends Component {
         showLocation({
             latitude: 10.019339,
             longitude: -84.219206,
-            // title: 'UCEM',  // optional
+            title: 'Universidad de Ciencias Empresariales',  // optional
             googleForceLatLon: false,  // optionally force GoogleMaps to use the latlon for the query instead of the title
             googlePlaceId: 'ChIJVXqv2M_5oI8ReghxpawYMMM',  // optionally specify the google-place-id
             dialogTitle: 'Ver ubicación de la UCEM', // optional (default: 'Open in Maps')
