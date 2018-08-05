@@ -20,8 +20,12 @@ const styles = {
     contianerNewsStyle: {
         flex: 1,
         marginBottom: 15,
+        marginTop: 15,
         paddingBottom:10,
-        backgroundColor:'white'
+        backgroundColor:'white',
+        borderRadius:5,
+        borderColor: '#455A64',
+        borderWidth: .5,
     },
     newStyle: {
         resizeMode: 'stretch',
@@ -33,7 +37,8 @@ const styles = {
     textStyleNews: {
         fontSize: 20,
         marginTop: 15,
-        marginLeft: 15
+        marginLeft: 15,
+        color:'black'
     },
     dateStyle: {
         fontSize: 14,

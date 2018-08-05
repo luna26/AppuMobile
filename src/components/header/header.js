@@ -1,15 +1,27 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, Text, StatusBar } from 'react-native';
 
 const Header = () => {
-    const { 
-        containerLogo, 
-        textStyle 
+    const {
+        containerLogo,
+        headerText,
+        headerTextContainer
     } = styles;
 
     return (
-        <View style={containerLogo}>
-            <Image resizeMode='stretch' style={{height:35, width:130}} source={require('../../assets/images/Logo-ucem.png')} />
+        <View>
+            <StatusBar
+                backgroundColor='#0288D1'
+                barStyle="light-content"
+            />
+            <View style={containerLogo}>
+                <Image resizeMode='stretch' style={{ height: 150, width: 150 }} source={require('../../assets/images/Logo-ucem-2.png')} />
+            </View>
+            <View style={headerTextContainer}>
+                <Text style={headerText}>
+                    Somos la Universidad de Alajuela
+                </Text>
+            </View>
         </View>
     );
 }
@@ -18,18 +30,24 @@ const styles = {
     containerLogo: {
         alignItems: 'center',
         backgroundColor: 'white',
-        height: 75,
+        height: 100,
         justifyContent: 'center',
-        borderBottomColor: '#179bd7',
-        borderBottomWidth: 2
+        // borderBottomColor: '#0288D1',
+        // borderBottomWidth: 30,
+        backgroundColor: '#03A9F4'
 
     },
-    textStyle: {
-        color: '#179bd7',
-        fontSize: 20,
-        margin: 5,
+    headerText: {
+        color: 'white',
+        textAlign: 'center',
         fontWeight: 'bold',
-        textAlign:'center'
+    },
+    headerTextContainer: {
+        borderTopColor: '#0288D1',
+        borderTopWidth: 2,
+        backgroundColor: '#03A9F4',
+        height: 30,
+        justifyContent: 'center'
     }
 }
 
