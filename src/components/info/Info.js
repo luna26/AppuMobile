@@ -3,7 +3,17 @@ import { getInfo } from '../../actions';
 import { connect } from 'react-redux';
 import openMap from 'react-native-open-maps';
 import call from 'react-native-phone-call'
-import { View, Text, ScrollView, ActivityIndicator, TouchableOpacity, ImageBackground, Linking, Platform, Image } from 'react-native';
+import { 
+    View, 
+    Text, 
+    ScrollView, 
+    ActivityIndicator, 
+    TouchableOpacity, 
+    ImageBackground, 
+    Linking, 
+    Platform, 
+    Image 
+} from 'react-native';
 import Menu from '../menu/menu';
 import Header from '../header/header';
 import { showLocation } from 'react-native-map-link';
@@ -81,7 +91,6 @@ class Info extends Component {
     renderInfo() {
         if (this.props.info.infoObj) {
             const { containerInfoText } = styles;
-            console.log(this.props.info.infoObj, 'this.props.info.infoObj');
             return (
                 <ScrollView style={containerInfoText}>
                     <Text>

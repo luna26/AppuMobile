@@ -24,7 +24,6 @@ const RouterComponent = () => {
                     tabs={true}
                     hideTabBar={true}
                 >
-
                     <Scene key="splash" component={Splash} hideNavBar={true} />
                     <Scene key="home" component={Home} hideNavBar={true} />
                     <Scene key="carrers" component={Carrers} hideNavBar={true} />

@@ -1,10 +1,10 @@
 import { ON_LOAD_CAREERS, ON_LOAD_CAREER_DETAIL, ON_RECEIVED_INFO_CAREER } from './types';
 import axios from 'axios';
-
+import { SERVER_DIR } from '../Config';
 
 export const onLoadCareers = () => {
     return dispatch => {
-        axios.post('http://34.219.69.51/getCareers')
+        axios.post(SERVER_DIR+'/getCareers')
             .then(function (response) {
                 setTimeout(function () {
                     dispatch({
@@ -29,7 +29,7 @@ export const showCareerDetail = (id) => {
 
 export const getSpecificCareer = (id) =>{
     return dispatch => {
-        axios.post('http://34.219.69.51/getCareer', { id: id })
+        axios.post(SERVER_DIR+'/getCareer', { id: id })
             .then(function (response) {
                 setTimeout(function () {
                     dispatch({

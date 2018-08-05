@@ -6,10 +6,11 @@ import {
     ALL_FIELD_ARE_REQUIRED
 } from './types';
 import axios from 'axios';
+import { SERVER_DIR } from '../Config';
 
 export const onLoadCareersCalc = () => {
     return dispatch => {
-        axios.post('http://34.219.69.51/getCareers')
+        axios.post(SERVER_DIR+'/getCareers')
             .then(function (response) {
                 dispatch({
                     type: ON_LOAD_CAREERS_CALC,
@@ -24,7 +25,7 @@ export const onLoadCareersCalc = () => {
 
 export const getCoursesCarrer = (id) => {
     return dispatch => {
-        axios.post('http://34.219.69.51/getCoursesCarrer', { id: id })
+        axios.post(SERVER_DIR+'/getCoursesCarrer', { id: id })
             .then(function (response) {
                 console.log(response.data);
                 dispatch({
@@ -46,7 +47,7 @@ export const requestCalc = (name, email, tel, courses) => {
             tel: tel,
             courses: courses
         }
-        axios.post('http://34.219.69.51/calcCost', data)
+        axios.post(SERVER_DIR+'/calcCost', data)
             .then(function (response) {
                 console.log(response, 'response');
                 dispatch({

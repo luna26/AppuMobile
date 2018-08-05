@@ -1,5 +1,9 @@
 import React from 'react';
-import { Text, TouchableOpacity, Image } from 'react-native';
+import {
+    Text,
+    TouchableOpacity,
+    Image
+} from 'react-native';
 
 const MenuItem = ({ label, onPress, iconSelected, index, indexSelected }) => {
     const { itemContainer, imageStyle, textStyle } = styles;
@@ -10,7 +14,7 @@ const MenuItem = ({ label, onPress, iconSelected, index, indexSelected }) => {
         </TouchableOpacity>
     );
 }
- 
+
 const renderIconSelected = (icon, indexSelected) => {
     switch (icon) {
         case 'home':
@@ -44,11 +48,11 @@ const renderIconSelected = (icon, indexSelected) => {
                 return require('../../assets/icons/info1.png');
             }
         case 'calc':
-        if (6 == indexSelected) {
-            return require('../../assets/icons/calc2.png');
-        } else {
-            return require('../../assets/icons/calc1.png');
-        }
+            if (6 == indexSelected) {
+                return require('../../assets/icons/calc2.png');
+            } else {
+                return require('../../assets/icons/calc1.png');
+            }
     }
 }
 

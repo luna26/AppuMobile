@@ -1,5 +1,6 @@
 import { LOAD_NEWS, NEWS_LOADING, LOAD_MORE_NEWS, NO_MORE_NEWS } from './types';
 import axios from 'axios';
+import { SERVER_DIR } from '../Config';
 
 export const loadNewsRequest = (skip) => {
     return dispatch => {
@@ -13,7 +14,7 @@ export const loadNewsRequest = (skip) => {
                 payload: true
             });
         }
-        axios.post('http://34.219.69.51/getNews', {skip:skip})
+        axios.post(SERVER_DIR+'/getNews', {skip:skip})
             .then(function (response) {
                 if(response.data.length != 0){
                     setTimeout(function () {
