@@ -90,6 +90,7 @@ class Carrers extends Component {
                         style={{ width: 38, height: 38 }}
                         source={require('../../assets/icons/move_slide.png')}
                     />
+                    <Text style={{marginTop:5}}>Deslize hacia los lados</Text>
                 </View>
             );
         }

@@ -103,12 +103,12 @@ class Calculator extends Component {
         } = styles;
 
         return (
-            <View style={{ marginBottom: 10 }}>
-                {this.renderToChange()}
+            <View style={{ marginBottom: 10, backgroundColor: '#3dc4ff' }}>
                 <Picker
                     selectedValue={this.state.careerSelected}
-                    style={{ height: 50, width: '100%', backgroundColor: '#3dc4ff', color: 'white', borderRadius: 10 }}
-                    onValueChange={this.sendCareerSelected.bind(this)}>
+                    style={{ height: 50, width: '100%', color: 'white'}}
+                    onValueChange={this.sendCareerSelected.bind(this)}
+                    >
                     <Picker.Item key={'unselectable'} label={'Seleccione su carrera'} value={'default'} />
                     {
                         this.props.calculator.careersCalculator.map(function (item, index) {
@@ -267,7 +267,7 @@ class Calculator extends Component {
             if (this.props.calculator.careersCalculator.length != 0) {
                 return (
                     <View style={mainContainerCalc}>
-                        <Text style={mainText}>Calculadora para estudiantes de primer ingreso</Text>
+                        <Text style={mainText}>Calcula los costos de matricula para estudiantes de primer ingreso</Text>
                         <View style={containerCalc}>
                             {this.renderPickerCareer()}
                             {this.renderInfoCalculator()}
@@ -546,12 +546,14 @@ const styles = {
         backgroundColor: 'white',
         flex: 1,
         position: 'relative',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     mainText: {
-        fontSize: 18,
+        fontSize: 16,
         marginTop: 10,
-        alignSelf: 'center',
+        color:'white',
+        backgroundColor:'rgba(61, 196, 255, 0.9)',
+        textAlign:'center'
     },
     containerCalc: {
         marginLeft: 10,
