@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { getInfo } from '../../actions';
 import { connect } from 'react-redux';
-import openMap from 'react-native-open-maps';
 import call from 'react-native-phone-call'
-import { 
-    View, 
-    Text, 
-    ScrollView, 
-    ActivityIndicator, 
-    TouchableOpacity, 
-    ImageBackground, 
-    Linking, 
-    Platform, 
-    Image 
+import {
+    View,
+    Text,
+    ScrollView,
+    ActivityIndicator,
+    TouchableOpacity,
+    ImageBackground,
+    Linking,
+    Image
 } from 'react-native';
 import Menu from '../menu/menu';
 import Header from '../header/header';
@@ -23,8 +21,8 @@ class Info extends Component {
     componentWillMount() {
         this.props.getInfo();
     }
-    
-    openMap(){
+
+    openMap() {
         showLocation({
             latitude: 10.019339,
             longitude: -84.219206,
@@ -58,18 +56,50 @@ class Info extends Component {
     makeCall() {
         const args = {
             number: '24309580',
-            prompt: false 
+            prompt: false
         }
 
         call(args).catch(console.error)
     }
 
+    goToWhatsapp() {
+        Linking.openURL('whatsapp://send?text=""&phone=+50683446379');
+    }
+
+    openWeb() {
+        Linking.openURL('http://ucem.co.cr/');
+    }
+
+    openFacebook() {
+        Linking.openURL('https://www.facebook.com/UCEMAlajuela/');
+    }
+
     returnCallButton() {
-        const { btnCallContainer, textCallBtn } = styles;
+        const { btnCallContainer } = styles;
         return (
             <TouchableOpacity onPress={this.makeCall} style={btnCallContainer}>
                 <Image style={{ width: 60, height: 60 }} source={require('../../assets/icons/phone_icon.png')} />
             </TouchableOpacity>
+        );
+    }
+
+    returnInfoBar() {
+        const { infoBarContainerStyle } = styles;
+        return (
+            <View style={infoBarContainerStyle}>
+                <TouchableOpacity onPress={this.makeCall}>
+                    <Image source={require('../../assets/icons/phone.png')} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.goToWhatsapp}>
+                    <Image source={require('../../assets/icons/whatsapp.png')} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.openWeb}>
+                    <Image source={require('../../assets/icons/web.png')} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.openFacebook}>
+                    <Image source={require('../../assets/icons/facebook.png')} />
+                </TouchableOpacity>
+            </View>
         );
     }
 
@@ -81,7 +111,8 @@ class Info extends Component {
                 <View style={containerStyle}>
                     {this.returnViewLocation()}
                     {this.renderInfo()}
-                    {this.returnCallButton()}
+                    {/* {this.returnCallButton()} */}
+                    {this.returnInfoBar()}
                 </View>
                 <Menu indexSelected={this.props.indexSelected} />
             </View>
@@ -114,7 +145,7 @@ const styles = {
         flex: 1,
     },
     containerInfo: {
-        flex: .8
+        flex: .7
     },
     containerInfoText: {
         backgroundColor: 'white',
@@ -124,7 +155,7 @@ const styles = {
         paddingLeft: 10,
         paddingTop: 15,
         paddingRight: 10,
-        paddingBottom:15
+        paddingBottom: 15
     },
     styleBtnMap: {
         flex: .2,
@@ -165,6 +196,14 @@ const styles = {
     ActivityIndicatorStyle: {
         flex: 1,
         justifyContent: 'center',
+    },
+    infoBarContainerStyle: {
+        flex: .1,
+        backgroundColor: 'white',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        backgroundColor: '#03A9F4',
+        alignItems: 'center'
     }
 }
 
