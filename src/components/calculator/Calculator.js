@@ -17,7 +17,8 @@ import {
     ActivityIndicator,
     ScrollView,
     TextInput,
-    Platform 
+    Platform,
+    Keyboard
 } from 'react-native';
 import {
     Table,
@@ -40,12 +41,32 @@ class Calculator extends Component {
             step: 1,
             email: '',
             name: '',
-            tel: ''
+            tel: '',
+            keyboardShow: false
         }
     }
 
     componentDidMount() {
         this.props.onLoadCareersCalc();
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow.bind(this));
+        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide.bind(this));
+    }
+
+    componentWillUnmount() {
+        this.keyboardDidShowListener.remove();
+        this.keyboardDidHideListener.remove();
+    }
+
+    _keyboardDidShow() {
+        this.setState({
+            keyboardShow: true
+        });
+    }
+
+    _keyboardDidHide() {
+        this.setState({
+            keyboardShow: false
+        });
     }
 
     sendCareerSelected(itemValue) {
@@ -106,9 +127,9 @@ class Calculator extends Component {
             <View style={{ marginBottom: 10, backgroundColor: '#3dc4ff' }}>
                 <Picker
                     selectedValue={this.state.careerSelected}
-                    style={{ height: 50, width: '100%', color: 'white'}}
+                    style={{ height: 50, width: '100%', color: 'white' }}
                     onValueChange={this.sendCareerSelected.bind(this)}
-                    >
+                >
                     <Picker.Item key={'unselectable'} label={'Seleccione su carrera'} value={'default'} />
                     {
                         this.props.calculator.careersCalculator.map(function (item, index) {
@@ -438,8 +459,8 @@ class Calculator extends Component {
     returnValidInfoText() {
         if (this.props.calculator.fieldsRequired) {
             return (
-                <View style={{justifyContent:'center', marginTop:10}}>
-                    <Text style={{color:'red'}}>Todos los campos son requeridos</Text>
+                <View style={{ justifyContent: 'center', marginTop: 10 }}>
+                    <Text style={{ color: 'red' }}>Todos los campos son requeridos</Text>
                 </View>
             );
         }
@@ -487,14 +508,33 @@ class Calculator extends Component {
                         />
                     </View>
                 </ScrollView>
-                <TouchableOpacity onPress={this.changeStep.bind(this, 1)} style={[btnNextStyle, btnNextCalcStyle]}>
-                        <Text style={textBtnNextStyle}>Volver a seleccion de materias</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={this.onPressCalc.bind(this)} style={[btnNextStyle, btnNextCalcStyle]}>
-                        <Text style={textBtnNextStyle}>Calcular</Text>
-                </TouchableOpacity>
+               {this.returnOptions()}
             </View>
         );
+    }
+
+    returnOptions() {
+        const {
+            btnNextStyle,
+            textBtnNextStyle,
+            btnNextCalcStyle,
+        } = styles;
+        if (!this.state.keyboardShow) {
+            return (
+                <View>
+                    <TouchableOpacity onPress={this.changeStep.bind(this, 1)} style={[btnNextStyle, btnNextCalcStyle]}>
+                        <Text style={textBtnNextStyle}>Volver a seleccion de materias</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={this.onPressCalc.bind(this)} style={[btnNextStyle, btnNextCalcStyle]}>
+                        <Text style={textBtnNextStyle}>Calcular</Text>
+                    </TouchableOpacity>
+                </View>
+            );
+        } else {
+            return (
+                <View />
+            );
+        }
     }
 
     onPressCalc() {
@@ -551,9 +591,9 @@ const styles = {
     mainText: {
         fontSize: 16,
         marginTop: 10,
-        color:'white',
-        backgroundColor:'rgba(61, 196, 255, 0.9)',
-        textAlign:'center'
+        color: 'white',
+        backgroundColor: 'rgba(61, 196, 255, 0.9)',
+        textAlign: 'center'
     },
     containerCalc: {
         marginLeft: 10,
@@ -608,6 +648,7 @@ const styles = {
     btnNextCalcStyle: {
         flex: .1,
         justifyContent: 'center',
+        padding:20
     },
     titleForm: {
         flex: .3,
