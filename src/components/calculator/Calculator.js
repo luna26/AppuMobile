@@ -288,7 +288,7 @@ class Calculator extends Component {
             if (this.props.calculator.careersCalculator.length != 0) {
                 return (
                     <View style={mainContainerCalc}>
-                        <Text style={mainText}>Calcula los costos de matricula para estudiantes de primer ingreso</Text>
+                        <Text style={mainText}>Calcule los costos de matricula para estudiantes de primer ingreso</Text>
                         <View style={containerCalc}>
                             {this.renderPickerCareer()}
                             {this.renderInfoCalculator()}

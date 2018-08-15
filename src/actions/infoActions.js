@@ -12,7 +12,7 @@ export const getInfo = () => {
                         type: ON_LOAD_INFO,
                         payload: response.data
                     });
-                },1500);
+                },2000);
             })
             .catch(function (error) {
                 console.log(error);

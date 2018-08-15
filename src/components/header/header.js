@@ -41,7 +41,7 @@ const styles = {
         backgroundColor: 'white',
         height: 100,
         justifyContent: 'center',
-        backgroundColor: '#03A9F4'
+        backgroundColor: '#3dc4ff'
 
     },
     headerText: {
@@ -52,7 +52,7 @@ const styles = {
     headerTextContainer: {
         borderTopColor: '#0288D1',
         borderTopWidth: 2,
-        backgroundColor: '#03A9F4',
+        backgroundColor: '#3dc4ff',
         height: 30,
         justifyContent: 'center'
     }

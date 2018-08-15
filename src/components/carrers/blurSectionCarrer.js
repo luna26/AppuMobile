@@ -60,7 +60,7 @@ class BlurSectionCarrer extends Component {
                     </View>
                     <View style={containerButton}>
                         <TouchableOpacity style={buttoStyle} onPress={this.props.closeBlur}>
-                            <Text style={styleTextButton}>Cerrar</Text>
+                            <Text style={styleTextButton}>Atrás</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
