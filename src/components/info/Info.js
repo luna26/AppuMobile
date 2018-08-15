@@ -202,7 +202,7 @@ const styles = {
         backgroundColor: 'white',
         flexDirection: 'row',
         justifyContent: 'space-around',
-        backgroundColor: '#03A9F4',
+        backgroundColor: '#3dc4ff',
         alignItems: 'center'
     }
 }

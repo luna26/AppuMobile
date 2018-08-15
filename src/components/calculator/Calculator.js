@@ -481,7 +481,7 @@ class Calculator extends Component {
             <View style={mainContainerCalc}>
                 {this.returnValidInfoText()}
                 <View style={titleForm}>
-                    <Text style={titleText}>Ingrese la informacion solicitada</Text>
+                    <Text style={titleText}>Ingrese la informacion solicitada para mostrar los costos de matricula.</Text>
                 </View>
                 <ScrollView style={formCalc}>
                     <View style={itemFormStyle}>
