@@ -63,7 +63,7 @@ class Info extends Component {
     }
 
     goToWhatsapp() {
-        Linking.openURL('whatsapp://send?text=""&phone=+50683446379');
+        Linking.openURL('whatsapp://send?text=Hola deseo obtener mas información! &phone=+50683446379');
     }
 
     openWeb() {
@@ -71,7 +71,7 @@ class Info extends Component {
     }
 
     openFacebook() {
-        Linking.openURL('https://www.facebook.com/UCEMAlajuela/');
+       Linking.openURL(`fb://profile/${318507358680394}`);
     }
 
     returnCallButton() {

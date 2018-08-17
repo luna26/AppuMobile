@@ -11,7 +11,7 @@ export const getInfo = () => {
                     dispatch({
                         type: ON_LOAD_INFO,
                         payload: response.data
-                    })
+                    });
                 },2000);
             })
             .catch(function (error) {
