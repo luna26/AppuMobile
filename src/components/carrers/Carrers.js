@@ -55,12 +55,10 @@ class Carrers extends Component {
     }
 
     _renderItem({ item, index }) {
-        let { height, width } = Dimensions.get('window');
+        let { width } = Dimensions.get('window');
         const {
             snapCarouselItemTitle,
             snapCarouselItemTitleText,
-            iconInfoContainerStyle,
-            styleContainerInfoBtn
         } = styles;
 
         return (
@@ -98,10 +96,11 @@ class Carrers extends Component {
 
     returnCarousel() {
         if (this.props.careers.infoCareers) {
-            let { height, width } = Dimensions.get('window');
+            let { width } = Dimensions.get('window');
             const { snapCarouselItemContainer } = styles;
             return (
                 <View style={snapCarouselItemContainer}>
+                <Text style={{color:"#4fc3f7"}}>Click en la imagen para ver información de la carrera.</Text>
                     <Carousel
                         ref={(c) => { this._carousel = c; }}
                         data={this.props.careers.infoCareers}
@@ -149,7 +148,8 @@ const styles = {
     },
     //SNAP CAROUSEL
     snapCarouselItemContainer: {
-        marginRight: 10
+        marginRight: 10,
+        alignItems:'center'
     },
     snapCarouselItemTitle: {
         height: 70,
