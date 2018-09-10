@@ -23,7 +23,6 @@ import {
 import {
     Table,
     TableWrapper,
-    Row,
     Rows,
     Col
 } from 'react-native-table-component';

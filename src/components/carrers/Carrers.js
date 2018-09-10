@@ -88,7 +88,7 @@ class Carrers extends Component {
                         style={{ width: 38, height: 38 }}
                         source={require('../../assets/icons/move_slide.png')}
                     />
-                    <Text style={{marginTop:5}}>Deslize hacia los lados</Text>
+                    <Text style={{ marginTop: 5 }}>Deslize hacia los lados</Text>
                 </View>
             );
         }
@@ -100,7 +100,7 @@ class Carrers extends Component {
             const { snapCarouselItemContainer } = styles;
             return (
                 <View style={snapCarouselItemContainer}>
-                <Text style={{color:"#4fc3f7"}}>Click en la imagen para ver información de la carrera.</Text>
+                    <Text style={{ color: "#4fc3f7" }}>Click en la imagen para ver información de la carrera.</Text>
                     <Carousel
                         ref={(c) => { this._carousel = c; }}
                         data={this.props.careers.infoCareers}
@@ -148,12 +148,10 @@ const styles = {
     },
     //SNAP CAROUSEL
     snapCarouselItemContainer: {
-        marginRight: 10,
-        alignItems:'center'
+        alignItems: 'center'
     },
     snapCarouselItemTitle: {
         height: 70,
-        paddingLeft: 10,
         justifyContent: 'center',
         backgroundColor: '#4fc3f7',
         borderBottomLeftRadius: 5,
@@ -161,7 +159,8 @@ const styles = {
     },
     snapCarouselItemTitleText: {
         fontSize: 15,
-        color: 'white'
+        color: 'white',
+        marginLeft: 15
     }
 
 }
@@ -172,4 +171,8 @@ const mapStateToProps = ({ careers }) => {
     };
 };
 
-export default connect(mapStateToProps, { onLoadCareers, showCareerDetail, closeBlurSection })(Carrers);
+export default connect(mapStateToProps, {
+    onLoadCareers,
+    showCareerDetail,
+    closeBlurSection
+})(Carrers);

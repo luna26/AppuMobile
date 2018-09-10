@@ -1,15 +1,11 @@
 import React from 'react';
-import { View } from 'react-native';
 import {
     Scene,
     Router,
-    Stack,
-    Tabs
 } from 'react-native-router-flux';
 import Home from './components/home/Home';
 import Splash from './components/splash/Splash';
 import Carrers from './components/carrers/Carrers';
-import Menu from './components/menu/menu';
 import Info from './components/info/Info';
 import Calculator from './components/calculator/Calculator';
 

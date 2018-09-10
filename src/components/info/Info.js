@@ -125,7 +125,7 @@ class Info extends Component {
             return (
                 <ScrollView style={containerInfoText}>
                     <Text>
-                        {this.props.info.infoObj[0].info_details};
+                        {this.props.info.infoObj[0].info_details}
                     </Text>
                 </ScrollView>
             );
