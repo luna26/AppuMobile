@@ -100,7 +100,7 @@ class Carrers extends Component {
             const { snapCarouselItemContainer } = styles;
             return (
                 <View style={snapCarouselItemContainer}>
-                    <Text style={{ color: "#4fc3f7" }}>Click en la imagen para ver información de la carrera.</Text>
+                    {/* <Text style={{ color: "#4fc3f7" }}>Click en la imagen para ver información de la carrera.</Text> */}
                     <Carousel
                         ref={(c) => { this._carousel = c; }}
                         data={this.props.careers.infoCareers}
